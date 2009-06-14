@@ -21,7 +21,6 @@
 		32BAE0B70371A74B00C91783 /* 3DZ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DZ_Prefix.pch; sourceTree = "<group>"; };
 		5073E0C609E734A800EC74B6 /* 3DZProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = 3DZProj.xcconfig; sourceTree = "<group>"; };
 		5073E0C709E734A800EC74B6 /* 3DZTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = 3DZTarget.xcconfig; sourceTree = "<group>"; };
-		50B2938909F016FC00694E55 /* 3DZPriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DZPriv.h; sourceTree = "<group>"; };
 		9EE615C30FE53437007B13F7 /* Vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vector.hpp; sourceTree = "<group>"; };
 		9EE615F90FE538ED007B13F7 /* StaticAssert.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StaticAssert.hpp; sourceTree = "<group>"; };
 		9EE616210FE53D67007B13F7 /* Model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Model.hpp; sourceTree = "<group>"; };
@@ -75,7 +74,6 @@
 			children = (
 				9EE615C30FE53437007B13F7 /* Vector.hpp */,
 				32BAE0B70371A74B00C91783 /* 3DZ_Prefix.pch */,
-				50B2938909F016FC00694E55 /* 3DZPriv.h */,
 				9EE615F90FE538ED007B13F7 /* StaticAssert.hpp */,
 				9EE616210FE53D67007B13F7 /* Model.hpp */,
 				9EE616220FE53D67007B13F7 /* Model.cpp */,
