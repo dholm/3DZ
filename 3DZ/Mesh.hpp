@@ -22,12 +22,8 @@ namespace TDZ {
 	class Mesh {
 	public:
 		typedef Vector<3, float> Vertex;
-
-		struct Face {
-			int m_vertexIndex;
-			int m_textureVertexIndex;
-			int m_normalIndex;
-		};
+		typedef Vector<3, int> Face;
+		typedef std::vector<Face> FaceVec;
 
 		virtual ~Mesh() { };
 		
@@ -38,7 +34,6 @@ namespace TDZ {
 		VertexVec m_textureVertices;
 		VertexVec m_normals;
 
-		typedef std::vector<Face> FaceVec;
 		FaceVec m_faces;
 	};
 	

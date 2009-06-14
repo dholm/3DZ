@@ -128,7 +128,7 @@ namespace TDZ {
 	bool ObjMeshFile::loadFace(const std::string& line) {
 		assert(line[0] == 'f');
 		
-		Face face = {0, };
+		Face face;
 		for (
 			std::string::size_type leftPos(line.find(" "));
 			leftPos != std::string::npos;
@@ -146,22 +146,22 @@ namespace TDZ {
 			if (word != " ") {
 				std::string::size_type posSlash1 = word.find("/");
 				std::string::size_type posSlash2 = word.find("/", posSlash1 + 1);
-				sscanf(word.substr(0, posSlash1).c_str(), "%d", &face.m_vertexIndex);
+				sscanf(word.substr(0, posSlash1).c_str(), "%d", &face[0]);
 				if (posSlash1 + 1 < posSlash2) {
-					sscanf(word.substr(posSlash1 + 1, posSlash2 - (posSlash1 + 1)).c_str(), "%d", &face.m_textureVertexIndex);
+					sscanf(word.substr(posSlash1 + 1, posSlash2 - (posSlash1 + 1)).c_str(), "%d", &face[1]);
 				} else {
-					face.m_textureVertexIndex = 0;
+					face[1] = 0;
 				}
 				
 				if (posSlash2 + 1 < word.length()) {
-					sscanf(word.substr(posSlash2 + 1, word.length()).c_str(), "%d", &face.m_normalIndex);
+					sscanf(word.substr(posSlash2 + 1, word.length()).c_str(), "%d", &face[2]);
 				} else {
-					face.m_normalIndex = 0;
+					face[2] = 0;
 				}
 				
-				--face.m_vertexIndex;
-				--face.m_textureVertexIndex;
-				--face.m_normalIndex;
+				--face[0];
+				--face[1];
+				--face[2];
 				
 				m_faces.push_back(face);
 			}
