@@ -21,22 +21,23 @@ namespace TDZ {
 
 	class Mesh {
 	public:
-		typedef Vector<3, float> Vector3f;
-		
-		virtual ~Mesh() { };
-		
-	protected:
-		typedef std::vector<Vector3f> Vector3fVec;
-		
-		Vector3fVec m_vertices;
-		Vector3fVec m_textureVertices;
-		Vector3fVec m_normals;
+		typedef Vector<3, float> Vertex;
 
 		struct Face {
 			int m_vertexIndex;
 			int m_textureVertexIndex;
 			int m_normalIndex;
 		};
+
+		virtual ~Mesh() { };
+		
+	protected:
+		typedef std::vector<Vertex> VertexVec;
+		
+		VertexVec m_vertices;
+		VertexVec m_textureVertices;
+		VertexVec m_normals;
+
 		typedef std::vector<Face> FaceVec;
 		FaceVec m_faces;
 	};

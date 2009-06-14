@@ -67,7 +67,7 @@ namespace TDZ {
 		assert(line[0] == 'v');
 		
 		char dummy[10] = {0, };
-		Vector3f v;
+		Vertex v;
 		v[0] = v[1] = v[2] = 0.0f;
 		sscanf(line.c_str(), "%s %f %f %f", dummy, &v[0], &v[1], &v[2]);
 

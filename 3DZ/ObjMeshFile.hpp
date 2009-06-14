@@ -31,10 +31,6 @@ namespace TDZ {
 		bool loadGroup(const std::string& line);
 		bool loadFace(const std::string& line);
 		
-		Vector3fVec m_vertices;
-		Vector3fVec m_textureVertices;
-		Vector3fVec m_normals;
-
 		struct SmoothingGroup {
 			int m_id;
 			FaceVec m_faces;
