@@ -1,5 +1,5 @@
 /*
- *  ObjModel.hpp
+ *  ObjMeshFile.hpp
  *  3DZ
  *
  *  Created by David Holm on 2009-06-14.
@@ -7,22 +7,22 @@
  *
  */
 
-#ifndef TDZ_OBJMODELFILE_HPP
-#define TDZ_OBJMODELFILE_HPP
+#ifndef TDZ_OBJMESHFILE_HPP
+#define TDZ_OBJMESHFILE_HPP
 
 #include <string>
 #include <map>
 
-#include <3DZ/Model.hpp>
+#include <3DZ/Mesh.hpp>
 
 /* The classes below are exported */
 #pragma GCC visibility push(hidden)
 
 namespace TDZ {
 	
-	class ObjModelFile : public Model {
+	class ObjMeshFile : public Mesh {
 	public:
-		ObjModelFile();
+		ObjMeshFile();
 		
 		bool load(const std::string& path);
 		
@@ -55,4 +55,4 @@ namespace TDZ {
 } // TDZ
 
 #pragma GCC visibility pop
-#endif /* TDZ_OBJMODELFILE_HPP */
+#endif /* TDZ_OBJMESHFILE_HPP */

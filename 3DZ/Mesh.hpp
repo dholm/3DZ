@@ -1,5 +1,5 @@
 /*
- *  Model.hpp
+ *  Mesh.hpp
  *  3DZ
  *
  *  Created by David Holm on 2009-06-14.
@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef TDZ_MODEL_HPP
-#define TDZ_MODEL_HPP
+#ifndef TDZ_MESH_HPP
+#define TDZ_MESH_HPP
 
 #include <vector>
 
@@ -19,11 +19,11 @@
 
 namespace TDZ {
 
-	class Model {
+	class Mesh {
 	public:
 		typedef Vector<3, float> Vector3f;
 		
-		virtual ~Model() { };
+		virtual ~Mesh() { };
 		
 	protected:
 		typedef std::vector<Vector3f> Vector3fVec;
@@ -44,4 +44,4 @@ namespace TDZ {
 } // TDZ
 
 #pragma GCC visibility pop
-#endif /* TDZ_MODEL_HPP */
+#endif /* TDZ_MESH_HPP */

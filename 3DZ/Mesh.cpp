@@ -1,5 +1,5 @@
 /*
- *  Model.cpp
+ *  Mesh.cpp
  *  3DZ
  *
  *  Created by David Holm on 2009-06-14.
@@ -7,7 +7,7 @@
  *
  */
 
-#include "Model.hpp"
+#include "Mesh.hpp"
 
 namespace TDZ {
 	

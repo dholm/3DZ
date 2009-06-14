@@ -1,5 +1,5 @@
 /*
- *  ObjModelFile.cpp
+ *  ObjMeshFile.cpp
  *  3DZ
  *
  *  Created by David Holm on 2009-06-14.
@@ -10,17 +10,17 @@
 #include <cassert>
 #include <fstream>
 
-#include "ObjModelFile.hpp"
+#include "ObjMeshFile.hpp"
 
 namespace TDZ {
 	
-	ObjModelFile::ObjModelFile() :
-		Model(),
+	ObjMeshFile::ObjMeshFile() :
+		Mesh(),
 		m_groups()
 	{
 	}
 
-	bool ObjModelFile::load(const std::string& path) {
+	bool ObjMeshFile::load(const std::string& path) {
 		std::ifstream objFile(path.c_str());
 		if (!objFile) {
 			return false;
@@ -63,7 +63,7 @@ namespace TDZ {
 		return true;
 	}
 	
-	bool ObjModelFile::loadVertex(const std::string& line) {
+	bool ObjMeshFile::loadVertex(const std::string& line) {
 		assert(line[0] == 'v');
 		
 		char dummy[10] = {0, };
@@ -91,7 +91,7 @@ namespace TDZ {
 		return true;
 	}
 	
-	bool ObjModelFile::loadGroup(const std::string& line) {
+	bool ObjMeshFile::loadGroup(const std::string& line) {
 		assert(line[0] == 'g');
 		
 		for (
@@ -125,7 +125,7 @@ namespace TDZ {
 		return true;
 	}
 	
-	bool ObjModelFile::loadFace(const std::string& line) {
+	bool ObjMeshFile::loadFace(const std::string& line) {
 		assert(line[0] == 'f');
 		
 		Face face = {0, };
