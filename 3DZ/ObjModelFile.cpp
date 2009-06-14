@@ -16,10 +16,6 @@ namespace TDZ {
 	
 	ObjModelFile::ObjModelFile() :
 		Model(),
-		m_vertices(),
-		m_textureVertices(),
-		m_normals(),
-		m_faces(),
 		m_groups()
 	{
 	}

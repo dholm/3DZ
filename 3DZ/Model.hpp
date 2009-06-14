@@ -28,6 +28,17 @@ namespace TDZ {
 	protected:
 		typedef std::vector<Vector3f> Vector3fVec;
 		
+		Vector3fVec m_vertices;
+		Vector3fVec m_textureVertices;
+		Vector3fVec m_normals;
+
+		struct Face {
+			int m_vertexIndex;
+			int m_textureVertexIndex;
+			int m_normalIndex;
+		};
+		typedef std::vector<Face> FaceVec;
+		FaceVec m_faces;
 	};
 	
 } // TDZ
