@@ -22,19 +22,21 @@ namespace TDZ {
 	class Mesh {
 	public:
 		typedef Vector<3, float> Vertex;
-		typedef Vector<3, int> Face;
-		typedef std::vector<Face> FaceVec;
 
 		virtual ~Mesh() { };
 		
 	protected:
 		typedef std::vector<Vertex> VertexVec;
+		typedef Vector<3, int> Face;
+		typedef std::vector<Face> FaceVec;
 		
 		VertexVec m_vertices;
 		VertexVec m_textureVertices;
 		VertexVec m_normals;
 
 		FaceVec m_faces;
+		
+		friend class FaceIterator;
 	};
 	
 } // TDZ
