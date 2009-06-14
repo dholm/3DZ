@@ -18,6 +18,8 @@
 namespace TDZ {
 
 	class ModelFactory {
+	public:
+		static bool load(const std::string& path, Model& outModel);
 	};
 	
 } // TDZ

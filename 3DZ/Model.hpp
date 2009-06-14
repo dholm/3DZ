@@ -10,6 +10,8 @@
 #ifndef TDZ_MODEL_HPP
 #define TDZ_MODEL_HPP
 
+#include <vector>
+
 #include <3DZ/Vector.hpp>
 
 /* The classes below are exported */
@@ -20,6 +22,11 @@ namespace TDZ {
 	class Model {
 	public:
 		typedef Vector<3, float> Vector3f;
+		
+		virtual ~Model() { };
+		
+	protected:
+		typedef std::vector<Vector3f> Vector3fVec;
 		
 	};
 	

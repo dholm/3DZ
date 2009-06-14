@@ -11,13 +11,12 @@
 #define TDZ_OBJMODELFILE_HPP
 
 #include <string>
-#include <vector>
 #include <map>
 
 #include <3DZ/Model.hpp>
 
 /* The classes below are exported */
-#pragma GCC visibility push(default)
+#pragma GCC visibility push(hidden)
 
 namespace TDZ {
 	
@@ -32,7 +31,6 @@ namespace TDZ {
 		bool loadGroup(const std::string& line);
 		bool loadFace(const std::string& line);
 		
-		typedef std::vector<Vector3f> Vector3fVec;
 		Vector3fVec m_vertices;
 		Vector3fVec m_textureVertices;
 		Vector3fVec m_normals;
