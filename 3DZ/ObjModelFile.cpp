@@ -60,7 +60,6 @@ namespace TDZ {
 					break;
 					
 				default:
-					std::cerr << "obj invalid [" << line << "]" << std::endl;
 					return false;
 			}
 		}
@@ -90,7 +89,6 @@ namespace TDZ {
 				break;
 				
 			default:
-				std::cerr << "loadv incorrect [" << line << "]" <<std::endl;
 				return false;
 		}
 		
@@ -100,20 +98,18 @@ namespace TDZ {
 	bool ObjModelFile::loadGroup(const std::string& line) {
 		assert(line[0] == 'g');
 		
-		std::string strLine(line.substr(0, line.length() - 1));
-
 		for (
-			std::string::size_type leftPos(strLine.find(" "));
+			std::string::size_type leftPos(line.find(" "));
 			leftPos != std::string::npos;
-			leftPos = strLine.find(" ", leftPos)
+			leftPos = line.find(" ", leftPos)
 		) {
-			std::string::size_type rightPos(strLine.find(" ", ++leftPos));
+			std::string::size_type rightPos(line.find(" ", ++leftPos));
 			
 			std::string word;
 			if (rightPos != std::string::npos) {
-				word = strLine.substr(leftPos, rightPos - leftPos);
+				word = line.substr(leftPos, rightPos - leftPos);
 			} else {
-				word = strLine.substr(leftPos, strLine.length());
+				word = line.substr(leftPos, line.length());
 			}
 			
 			if (word != " ") {
@@ -136,21 +132,19 @@ namespace TDZ {
 	bool ObjModelFile::loadFace(const std::string& line) {
 		assert(line[0] == 'f');
 		
-		std::string strLine(line.substr(0, line.length() - 1));
-		
 		Face face = {0, };
 		for (
-			std::string::size_type leftPos(strLine.find(" "));
+			std::string::size_type leftPos(line.find(" "));
 			leftPos != std::string::npos;
-			leftPos = strLine.find(" ", leftPos)
+			leftPos = line.find(" ", leftPos)
 		) {
-			std::string::size_type rightPos(strLine.find(" ", ++leftPos));
+			std::string::size_type rightPos(line.find(" ", ++leftPos));
 
 			std::string word;
 			if (rightPos != std::string::npos) {
-				word = strLine.substr(leftPos, rightPos - leftPos);
+				word = line.substr(leftPos, rightPos - leftPos);
 			} else {
-				word = strLine.substr(leftPos);
+				word = line.substr(leftPos);
 			}
 
 			if (word != " ") {
