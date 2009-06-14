@@ -10,6 +10,8 @@
 #include <cassert>
 #include <fstream>
 
+#include <3DZ/StringUtils.hpp>
+
 #include "ObjMeshFile.hpp"
 
 namespace TDZ {
@@ -29,7 +31,7 @@ namespace TDZ {
 		while (objFile) {
 			char buffer[256] = {0, };
 			objFile.getline(buffer, sizeof(buffer));
-			std::string line = std::string(buffer);
+			std::string line(trim(buffer));
 			line = line.substr(0, line.find('#'));
 			
 			if (line.empty()) {
@@ -147,13 +149,13 @@ namespace TDZ {
 				std::string::size_type posSlash1 = word.find("/");
 				std::string::size_type posSlash2 = word.find("/", posSlash1 + 1);
 				sscanf(word.substr(0, posSlash1).c_str(), "%d", &face[0]);
-				if (posSlash1 + 1 < posSlash2) {
+				if (posSlash1 + 1 <= posSlash2) {
 					sscanf(word.substr(posSlash1 + 1, posSlash2 - (posSlash1 + 1)).c_str(), "%d", &face[1]);
 				} else {
 					face[1] = 0;
 				}
 				
-				if (posSlash2 + 1 < word.length()) {
+				if (posSlash2 + 1 <= word.length()) {
 					sscanf(word.substr(posSlash2 + 1, word.length()).c_str(), "%d", &face[2]);
 				} else {
 					face[2] = 0;
