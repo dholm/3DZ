@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E43C7420FE6C49E00F92DCB /* Model.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E43C7400FE6C49E00F92DCB /* Model.hpp */; };
+		9E43C7430FE6C49E00F92DCB /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E43C7410FE6C49E00F92DCB /* Model.cpp */; };
+		9E43C7480FE6C54E00F92DCB /* ModelFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E43C7440FE6C54E00F92DCB /* ModelFactory.cpp */; };
+		9E43C7490FE6C54E00F92DCB /* ModelFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E43C7450FE6C54E00F92DCB /* ModelFactory.hpp */; };
+		9E43C74A0FE6C54E00F92DCB /* ObjModelFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */; };
+		9E43C74B0FE6C54E00F92DCB /* ObjModelFile.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E43C7470FE6C54E00F92DCB /* ObjModelFile.hpp */; };
 		9ED392BF0FE5884B008A9D41 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED392B90FE5884B008A9D41 /* Mesh.cpp */; };
 		9ED392C00FE5884B008A9D41 /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED392BA0FE5884B008A9D41 /* Mesh.hpp */; };
-		9ED392C10FE5884B008A9D41 /* MeshFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED392BB0FE5884B008A9D41 /* MeshFactory.cpp */; };
-		9ED392C20FE5884B008A9D41 /* MeshFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED392BC0FE5884B008A9D41 /* MeshFactory.hpp */; };
-		9ED392C30FE5884B008A9D41 /* ObjMeshFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED392BD0FE5884B008A9D41 /* ObjMeshFile.cpp */; };
-		9ED392C40FE5884B008A9D41 /* ObjMeshFile.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED392BE0FE5884B008A9D41 /* ObjMeshFile.hpp */; };
 		9ED393320FE58C88008A9D41 /* FaceIterator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED393300FE58C88008A9D41 /* FaceIterator.hpp */; };
 		9ED393330FE58C88008A9D41 /* FaceIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED393310FE58C88008A9D41 /* FaceIterator.cpp */; };
 		9ED393700FE59681008A9D41 /* StringUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED3936E0FE59681008A9D41 /* StringUtils.hpp */; };
@@ -25,12 +27,14 @@
 		32BAE0B70371A74B00C91783 /* 3DZ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DZ_Prefix.pch; sourceTree = "<group>"; };
 		5073E0C609E734A800EC74B6 /* 3DZProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = 3DZProj.xcconfig; sourceTree = "<group>"; };
 		5073E0C709E734A800EC74B6 /* 3DZTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = 3DZTarget.xcconfig; sourceTree = "<group>"; };
+		9E43C7400FE6C49E00F92DCB /* Model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Model.hpp; sourceTree = "<group>"; };
+		9E43C7410FE6C49E00F92DCB /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		9E43C7440FE6C54E00F92DCB /* ModelFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelFactory.cpp; sourceTree = "<group>"; };
+		9E43C7450FE6C54E00F92DCB /* ModelFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModelFactory.hpp; sourceTree = "<group>"; };
+		9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjModelFile.cpp; sourceTree = "<group>"; };
+		9E43C7470FE6C54E00F92DCB /* ObjModelFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjModelFile.hpp; sourceTree = "<group>"; };
 		9ED392B90FE5884B008A9D41 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		9ED392BA0FE5884B008A9D41 /* Mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
-		9ED392BB0FE5884B008A9D41 /* MeshFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshFactory.cpp; sourceTree = "<group>"; };
-		9ED392BC0FE5884B008A9D41 /* MeshFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MeshFactory.hpp; sourceTree = "<group>"; };
-		9ED392BD0FE5884B008A9D41 /* ObjMeshFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjMeshFile.cpp; sourceTree = "<group>"; };
-		9ED392BE0FE5884B008A9D41 /* ObjMeshFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjMeshFile.hpp; sourceTree = "<group>"; };
 		9ED393300FE58C88008A9D41 /* FaceIterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FaceIterator.hpp; sourceTree = "<group>"; };
 		9ED393310FE58C88008A9D41 /* FaceIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FaceIterator.cpp; sourceTree = "<group>"; };
 		9ED3936E0FE59681008A9D41 /* StringUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StringUtils.hpp; sourceTree = "<group>"; };
@@ -80,12 +84,12 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9E43C7440FE6C54E00F92DCB /* ModelFactory.cpp */,
+				9E43C7450FE6C54E00F92DCB /* ModelFactory.hpp */,
+				9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */,
+				9E43C7470FE6C54E00F92DCB /* ObjModelFile.hpp */,
 				9ED392B90FE5884B008A9D41 /* Mesh.cpp */,
 				9ED392BA0FE5884B008A9D41 /* Mesh.hpp */,
-				9ED392BB0FE5884B008A9D41 /* MeshFactory.cpp */,
-				9ED392BC0FE5884B008A9D41 /* MeshFactory.hpp */,
-				9ED392BD0FE5884B008A9D41 /* ObjMeshFile.cpp */,
-				9ED392BE0FE5884B008A9D41 /* ObjMeshFile.hpp */,
 				9EE615C30FE53437007B13F7 /* Vector.hpp */,
 				32BAE0B70371A74B00C91783 /* 3DZ_Prefix.pch */,
 				9EE615F90FE538ED007B13F7 /* StaticAssert.hpp */,
@@ -93,6 +97,8 @@
 				9ED393310FE58C88008A9D41 /* FaceIterator.cpp */,
 				9ED3936E0FE59681008A9D41 /* StringUtils.hpp */,
 				9ED3936F0FE59681008A9D41 /* StringUtils.cpp */,
+				9E43C7400FE6C49E00F92DCB /* Model.hpp */,
+				9E43C7410FE6C49E00F92DCB /* Model.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -116,10 +122,11 @@
 				9EE615C50FE53437007B13F7 /* Vector.hpp in Headers */,
 				9EE615FA0FE538ED007B13F7 /* StaticAssert.hpp in Headers */,
 				9ED392C00FE5884B008A9D41 /* Mesh.hpp in Headers */,
-				9ED392C20FE5884B008A9D41 /* MeshFactory.hpp in Headers */,
-				9ED392C40FE5884B008A9D41 /* ObjMeshFile.hpp in Headers */,
 				9ED393320FE58C88008A9D41 /* FaceIterator.hpp in Headers */,
 				9ED393700FE59681008A9D41 /* StringUtils.hpp in Headers */,
+				9E43C7420FE6C49E00F92DCB /* Model.hpp in Headers */,
+				9E43C7490FE6C54E00F92DCB /* ModelFactory.hpp in Headers */,
+				9E43C74B0FE6C54E00F92DCB /* ObjModelFile.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,10 +174,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ED392BF0FE5884B008A9D41 /* Mesh.cpp in Sources */,
-				9ED392C10FE5884B008A9D41 /* MeshFactory.cpp in Sources */,
-				9ED392C30FE5884B008A9D41 /* ObjMeshFile.cpp in Sources */,
 				9ED393330FE58C88008A9D41 /* FaceIterator.cpp in Sources */,
 				9ED393710FE59681008A9D41 /* StringUtils.cpp in Sources */,
+				9E43C7430FE6C49E00F92DCB /* Model.cpp in Sources */,
+				9E43C7480FE6C54E00F92DCB /* ModelFactory.cpp in Sources */,
+				9E43C74A0FE6C54E00F92DCB /* ObjModelFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

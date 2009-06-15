@@ -1,5 +1,5 @@
 /*
- *  ObjMeshFile.cpp
+ *  ObjModelFile.cpp
  *  3DZ
  *
  *  Created by David Holm on 2009-06-14.
@@ -12,88 +12,92 @@
 
 #include <3DZ/StringUtils.hpp>
 
-#include "ObjMeshFile.hpp"
+#include "ObjModelFile.hpp"
 
 namespace TDZ {
 	
-	ObjMeshFile::ObjMeshFile() :
+	ObjModelFile::ObjModelFile() :
 		Mesh(),
 		m_groups()
 	{
 	}
 
-	bool ObjMeshFile::load(const std::string& path) {
+	bool ObjModelFile::load(const std::string& path) {
 		std::ifstream objFile(path.c_str());
 		if (!objFile) {
 			return false;
 		}
-		
-		while (objFile) {
-			char buffer[256] = {0, };
-			objFile.getline(buffer, sizeof(buffer));
-			std::string line(trim(buffer));
-			line = line.substr(0, line.find('#'));
-			
-			if (line.empty()) {
-				continue;
-			}
-			
-			switch (line[0]) {
+
+		std::string word;
+		while (objFile >> word) {
+			switch (word[0]) {
 				case 'v':
-					if (!loadVertex(line)) {
+					if (word == "v" && !loadVertex(objFile)) {
 						return false;
-					}
-					break;
-					
-				case 'g':
-					if (!loadGroup(line)) {
+					} else if (word == "vt" && !loadTextureVertex(objFile)) {
+						return false;
+					} else if (word == "vn" && !loadNormal(objFile)) {
+						return false;
+					} else {
 						return false;
 					}
 					break;
 					
 				case 'f':
-					if (!loadFace(line)) {
+					if (!loadFace(objFile)) {
 						return false;
 					}
 					break;
 					
+				case 'g':
+					if (!loadGroup(objFile)) {
+						return false;
+					}
+					break;
+					
+				case 'o':
+					objFile >> m_name;
+					break;
+					
+				case 'm':
+					/* Load material */
+					break;
+					
 				default:
-					return false;
+					std::getline(objFile, word); // Skip
 			}
+			word.clear();
 		}
 		
 		return true;
 	}
 	
-	bool ObjMeshFile::loadVertex(const std::string& line) {
-		assert(line[0] == 'v');
-		
-		char dummy[10] = {0, };
+	bool ObjModelFile::loadVertex(std::istream& objStream) {
 		Vertex v;
 		v[0] = v[1] = v[2] = 0.0f;
-		sscanf(line.c_str(), "%s %f %f %f", dummy, &v[0], &v[1], &v[2]);
+		objStream >> v[0] >> v[1] >> v[2];
+		m_vertices.push_back(v);
+	}
 
-		switch (line[1]) {
-			case ' ':
-				m_vertices.push_back(v);
-				break;
-				
-			case 't':
-				m_textureVertices.push_back(v);
-				break;
-				
-			case 'n':
-				m_normals.push_back(v);
-				break;
-				
-			default:
-				return false;
-		}
-		
-		return true;
+	bool ObjModelFile::loadTextureVertex(std::istream& objStream) {
+		Vertex v;
+		v[0] = v[1] = v[2] = 0.0f;
+		objStream >> v[0] >> v[1] >> v[2];
+		m_textureVertices.push_back(v);
+	}
+
+	bool ObjModelFile::loadNormal(std::istream& objStream) {
+		Vertex v;
+		v[0] = v[1] = v[2] = 0.0f;
+		objStream >> v[0] >> v[1] >> v[2];
+		m_normals.push_back(v);
 	}
 	
-	bool ObjMeshFile::loadGroup(const std::string& line) {
+	bool ObjModelFile::loadGroup(std::istream& objStream) {
+		std::string name;
+		std::getline(objStream, name);
+		objStream >> name;
+		
 		assert(line[0] == 'g');
 		
 		for (
@@ -127,7 +131,7 @@ namespace TDZ {
 		return true;
 	}
 	
-	bool ObjMeshFile::loadFace(const std::string& line) {
+	bool ObjModelFile::loadFace(const std::string& line) {
 		assert(line[0] == 'f');
 		
 		Face face;

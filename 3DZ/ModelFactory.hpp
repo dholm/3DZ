@@ -1,5 +1,5 @@
 /*
- *  MeshFactory.hpp
+ *  ModelFactory.hpp
  *  3DZ
  *
  *  Created by David Holm on 2009-06-14.
@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef TDZ_MESHFACTORY_HPP
-#define TDZ_MESHFACTORY_HPP
+#ifndef TDZ_MODELFACTORY_HPP
+#define TDZ_MODELFACTORY_HPP
 
 #include <3DZ/Mesh.hpp>
 
@@ -17,7 +17,7 @@
 
 namespace TDZ {
 
-	class MeshFactory {
+	class ModelFactory {
 	public:
 		static bool load(const std::string& path, Mesh& outMesh);
 	};
@@ -25,4 +25,4 @@ namespace TDZ {
 } // TDZ
 
 #pragma GCC visibility pop
-#endif /* TDZ_MESHFACTORY_HPP */
+#endif /* TDZ_MODELFACTORY_HPP */

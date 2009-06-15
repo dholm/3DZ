@@ -1,5 +1,5 @@
 /*
- *  MeshFactory.cpp
+ *  ModelFactory.cpp
  *  3DZ
  *
  *  Created by David Holm on 2009-06-14.
@@ -7,13 +7,13 @@
  *
  */
 
-#include <3DZ/ObjMeshFile.hpp>
+#include <3DZ/ObjModelFile.hpp>
 
-#include "MeshFactory.hpp"
+#include "ModelFactory.hpp"
 
 namespace TDZ {
 	
-	bool MeshFactory::load(const std::string& path, Mesh& outMesh) {
+	bool ModelFactory::load(const std::string& path, Mesh& outMesh) {
 		std::string::size_type extPos(path.rfind('.'));
 		if (extPos == std::string::npos) {
 			return false;
@@ -21,7 +21,7 @@ namespace TDZ {
 		
 		std::string ext(path.substr(extPos + 1));
 		if (ext == "obj") {
-			ObjMeshFile objMesh;
+			ObjModelFile objMesh;
 			if (!objMesh.load(path)) {
 				return false;
 			}
