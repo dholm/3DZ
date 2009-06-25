@@ -13,7 +13,7 @@
 
 namespace TDZ {
 	
-	bool ModelFactory::load(const std::string& path, Mesh& outMesh) {
+	bool ModelFactory::load(const std::string& path, Model& outModel) {
 		std::string::size_type extPos(path.rfind('.'));
 		if (extPos == std::string::npos) {
 			return false;
@@ -21,11 +21,11 @@ namespace TDZ {
 		
 		std::string ext(path.substr(extPos + 1));
 		if (ext == "obj") {
-			ObjModelFile objMesh;
-			if (!objMesh.load(path)) {
+			ObjModelFile objModel;
+			if (!objModel.load(path)) {
 				return false;
 			}
-			outMesh = objMesh;
+			outModel = objModel;
 			return true;
 		}
 

@@ -21,6 +21,14 @@ namespace TDZ {
 		{
 		}
 		
+		Vector(ComponentT c1, ComponentT c2, ComponentT c3) :
+			m_store()
+		{
+			m_store.s.x = c1;
+			m_store.s.y = c2;
+			m_store.s.z = c3;
+		}
+		
 		Vector(const ComponentT* components) :
 			m_store()
 		{
@@ -49,4 +57,16 @@ namespace TDZ {
 			ComponentT a[3];
 		} m_store __attribute__ ((aligned (16)));
 	};
+	
+	template <typename ComponentT>
+	std::ostream& operator<<(std::ostream& outStream, const Vector<3, ComponentT>& vector) {
+		outStream
+			<< "["
+				<< vector[0] << ", "
+				<< vector[1] << ", "
+				<< vector[2]
+			<< "]";
+		return outStream;
+	}
+	
 } // TDZ

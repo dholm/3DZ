@@ -29,7 +29,7 @@ namespace TDZ {
 				
 	private:
 		const Mesh& m_meshRef;
-		Mesh::FaceVec::const_iterator m_faceIt;
+		int m_currentVertex;
 	};
 	
 } // TDZ

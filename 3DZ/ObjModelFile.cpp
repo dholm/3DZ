@@ -9,17 +9,29 @@
 
 #include <cassert>
 #include <fstream>
+#include <sstream>
+#include <iterator>
 
 #include <3DZ/StringUtils.hpp>
 
 #include "ObjModelFile.hpp"
 
 namespace TDZ {
-	
-	ObjModelFile::ObjModelFile() :
-		Mesh(),
-		m_groups()
-	{
+
+	ObjModelFile::ObjModelFile() {
+	}
+
+	ObjModelFile::operator Model() const {
+		Model model;
+
+		model.setName(m_name);
+
+		for (NameGroupMap::const_iterator it(m_groupMap.begin()); it != m_groupMap.end(); ++it) {
+			Mesh mesh;
+			groupToMesh(it->second, mesh);
+			model.pushMesh(it->first, mesh);
+		}
+		return model;
 	}
 
 	bool ObjModelFile::load(const std::string& path) {
@@ -28,176 +40,111 @@ namespace TDZ {
 			return false;
 		}
 
+		ObjGroup objGroup;
 		std::string word;
-		while (objFile >> word) {
-			switch (word[0]) {
-				case 'v':
-					if (word == "v" && !loadVertex(objFile)) {
-						return false;
-					} else if (word == "vt" && !loadTextureVertex(objFile)) {
-						return false;
-					} else if (word == "vn" && !loadNormal(objFile)) {
-						return false;
-					} else {
-						return false;
-					}
-					break;
-					
-				case 'f':
-					if (!loadFace(objFile)) {
-						return false;
-					}
-					break;
-					
-				case 'g':
-					if (!loadGroup(objFile)) {
-						return false;
-					}
-					break;
-					
-				case 'o':
-					objFile >> m_name;
-					break;
-					
-				case 'm':
-					/* Load material */
-					break;
-					
-				default:
-					std::getline(objFile, word); // Skip
+		for (std::string word; objFile >> word; ) {
+			if (word == "v") {
+				loadVertex(objFile, objGroup);
+			} else if (word == "vt") {
+				loadTextureVertex(objFile, objGroup);
+			} else if (word == "vn") {
+				loadNormal(objFile, objGroup);
+			} else if (word == "f") {
+				if (!loadFace(objFile, objGroup)) {
+					return false;
+				}
+			} else if (word == "g") {
+				loadGroup(objFile, objGroup);
+			} else if (word == "o") {
+				std::getline(objFile, m_name);
+				m_name = trim(m_name);
+			} else if (word == "mtllib") {
+				/* Load material */
+				assert(false);
+			} else {
+				/* Skip */
+				std::string line;
+				std::getline(objFile, line);
 			}
 			word.clear();
 		}
+		pushGroup(objGroup);
 		
 		return true;
 	}
 	
-	bool ObjModelFile::loadVertex(std::istream& objStream) {
-		Vertex v;
+	void ObjModelFile::loadVertex(std::istream& objStream, ObjGroup& objGroup) const {
+		Mesh::Vertex v;
 		v[0] = v[1] = v[2] = 0.0f;
 		objStream >> v[0] >> v[1] >> v[2];
-		m_vertices.push_back(v);
+		objGroup.m_vertices.push_back(v);
 	}
 
-	bool ObjModelFile::loadTextureVertex(std::istream& objStream) {
-		Vertex v;
+	void ObjModelFile::loadTextureVertex(std::istream& objStream, ObjGroup& objGroup) const {
+		Mesh::Vertex v;
 		v[0] = v[1] = v[2] = 0.0f;
 		objStream >> v[0] >> v[1] >> v[2];
-		m_textureVertices.push_back(v);
+		objGroup.m_textureVertices.push_back(v);
 	}
 
-	bool ObjModelFile::loadNormal(std::istream& objStream) {
-		Vertex v;
+	void ObjModelFile::loadNormal(std::istream& objStream, ObjGroup& objGroup) const {
+		Mesh::Vertex v;
 		v[0] = v[1] = v[2] = 0.0f;
 		objStream >> v[0] >> v[1] >> v[2];
-		m_normals.push_back(v);
+		objGroup.m_normals.push_back(v);
 	}
 	
-	bool ObjModelFile::loadGroup(std::istream& objStream) {
-		std::string name;
-		std::getline(objStream, name);
-		objStream >> name;
-		
-		assert(line[0] == 'g');
-		
+	bool ObjModelFile::loadFace(std::istream& objStream, ObjGroup& objGroup) const {
+		std::string line;
+		std::getline(objStream, line);
+		std::stringstream lineStream(line);
 		for (
-			std::string::size_type leftPos(line.find(" "));
-			leftPos != std::string::npos;
-			leftPos = line.find(" ", leftPos)
+			std::istream_iterator<std::string> it(lineStream), end;
+			it != end;
+			++it
 		) {
-			std::string::size_type rightPos(line.find(" ", ++leftPos));
-			
-			std::string word;
-			if (rightPos != std::string::npos) {
-				word = line.substr(leftPos, rightPos - leftPos);
-			} else {
-				word = line.substr(leftPos, line.length());
-			}
-			
-			if (word != " ") {
-				NameGroupMap::const_iterator it(m_groups.find(word));
-				if (it == m_groups.end()) {
-					Group group;
-					group.m_name = word;
-					group.m_currentSmoothingGroupKey = -1;
-					group.m_faces = 0;
-					
-					m_groups[word] = group;
-					it = m_groups.find(word);
+			Face face;
+			int type = FaceType_V;
+			std::stringstream faceStrStream(*it);
+			while (faceStrStream) {
+				char slash('/');
+				faceStrStream >> face[type] >> slash;
+				--face[type++];
+				
+				if (FaceType_VN < type) {
+					return false;
 				}
 			}
+			objGroup.m_faces.push_back(face);
 		}
 		
 		return true;
 	}
+
+	void ObjModelFile::loadGroup(std::istream& objStream, ObjGroup& objGroup) {
+		pushGroup(objGroup);
+		
+		objGroup = ObjGroup();
+		std::getline(objStream, objGroup.m_name);
+	}
+
+	void ObjModelFile::pushGroup(const ObjGroup& objGroup) {
+		if (!objGroup.m_name.empty()) {
+			m_groupMap[objGroup.m_name] = objGroup;
+		}
+	}
 	
-	bool ObjModelFile::loadFace(const std::string& line) {
-		assert(line[0] == 'f');
-		
-		Face face;
-		for (
-			std::string::size_type leftPos(line.find(" "));
-			leftPos != std::string::npos;
-			leftPos = line.find(" ", leftPos)
-		) {
-			std::string::size_type rightPos(line.find(" ", ++leftPos));
-
-			std::string word;
-			if (rightPos != std::string::npos) {
-				word = line.substr(leftPos, rightPos - leftPos);
-			} else {
-				word = line.substr(leftPos);
+	void ObjModelFile::groupToMesh(const ObjGroup& group, Mesh& outMesh) const {
+		for (FaceVec::const_iterator it(group.m_faces.begin()); it != group.m_faces.end(); ++it) {
+			if (0 <= (*it)[0] && (*it)[0] < group.m_vertices.size()) {
+				outMesh.pushVertex(group.m_vertices[(*it)[0]]);
 			}
-
-			if (word != " ") {
-				std::string::size_type posSlash1 = word.find("/");
-				std::string::size_type posSlash2 = word.find("/", posSlash1 + 1);
-				sscanf(word.substr(0, posSlash1).c_str(), "%d", &face[0]);
-				if (posSlash1 + 1 <= posSlash2) {
-					sscanf(word.substr(posSlash1 + 1, posSlash2 - (posSlash1 + 1)).c_str(), "%d", &face[1]);
-				} else {
-					face[1] = 0;
-				}
-				
-				if (posSlash2 + 1 <= word.length()) {
-					sscanf(word.substr(posSlash2 + 1, word.length()).c_str(), "%d", &face[2]);
-				} else {
-					face[2] = 0;
-				}
-				
-				--face[0];
-				--face[1];
-				--face[2];
-				
-				m_faces.push_back(face);
+			if (0 <= (*it)[1] && (*it)[1] < group.m_textureVertices.size()) {
+				outMesh.pushTextureVertex(group.m_textureVertices[(*it)[1]]);
+			}
+			if (0 <= (*it)[2] && (*it)[2] < group.m_normals.size()) {
+				outMesh.pushNormal(group.m_normals[(*it)[2]]);
 			}
 		}
-		
-		if (m_groups.empty()) {
-			Group group = {0, };
-			group.m_name = "default";
-			m_groups["default"] = group;
-		}
-		
-		for (
-			NameGroupMap::iterator groupIt(m_groups.begin());
-			groupIt != m_groups.end();
-			++groupIt
-		) {
-			if (groupIt->second.m_smoothingGroups.empty()) {
-				IdSmoothingGroupMap::iterator smoothingGroupIt(groupIt->second.m_smoothingGroups.find(0));
-				if (smoothingGroupIt == groupIt->second.m_smoothingGroups.end()) {
-					SmoothingGroup smoothingGroup = {0, };
-					smoothingGroup.m_id = 0;
-					groupIt->second.m_smoothingGroups[0] = smoothingGroup;
-				}
-				groupIt->second.m_currentSmoothingGroupKey = 0;
-			}
-			
-			groupIt->second.m_smoothingGroups[groupIt->second.m_currentSmoothingGroupKey].m_faces.push_back(face);
-			++groupIt->second.m_faces;
-		}
-		
-		return true;
 	}
 } // TDZ

@@ -10,19 +10,15 @@
 #ifndef TDZ_MODELFACTORY_HPP
 #define TDZ_MODELFACTORY_HPP
 
-#include <3DZ/Mesh.hpp>
-
-/* The classes below are exported */
-#pragma GCC visibility push(default)
+#include <3DZ/Model.hpp>
 
 namespace TDZ {
 
 	class ModelFactory {
 	public:
-		static bool load(const std::string& path, Mesh& outMesh);
+		static bool load(const std::string& path, Model& outModel);
 	};
 	
 } // TDZ
 
-#pragma GCC visibility pop
 #endif /* TDZ_MODELFACTORY_HPP */

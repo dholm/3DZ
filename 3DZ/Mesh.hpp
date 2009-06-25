@@ -11,35 +11,37 @@
 #define TDZ_MESH_HPP
 
 #include <vector>
+#include <iosfwd>
 
 #include <3DZ/Vector.hpp>
-
-/* The classes below are exported */
-#pragma GCC visibility push(default)
 
 namespace TDZ {
 
 	class Mesh {
 	public:
 		typedef Vector<3, float> Vertex;
+		typedef std::vector<Vertex> VertexVec;
 
+		static const Vertex NULL_VERTEX;
+		
 		virtual ~Mesh() { };
 		
-	protected:
-		typedef std::vector<Vertex> VertexVec;
-		typedef Vector<3, int> Face;
-		typedef std::vector<Face> FaceVec;
+		void pushVertex(const Vertex& vertex);
+		void pushTextureVertex(const Vertex& textureVertex);
+		void pushNormal(const Vertex& normal);
 		
+	private:
 		VertexVec m_vertices;
 		VertexVec m_textureVertices;
 		VertexVec m_normals;
-
-		FaceVec m_faces;
 		
+		friend class Model;
 		friend class FaceIterator;
+		friend std::ostream& operator<<(std::ostream& outStream, const Mesh& mesh);
 	};
+	
+	std::ostream& operator<<(std::ostream& outStream, const Mesh& mesh);
 	
 } // TDZ
 
-#pragma GCC visibility pop
 #endif /* TDZ_MESH_HPP */
