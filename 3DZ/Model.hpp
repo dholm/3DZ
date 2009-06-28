@@ -22,8 +22,12 @@ namespace TDZ {
 	public:
 		typedef std::map<std::string, Mesh> NameMeshMap;
 
+		virtual ~Model() { };
+		
 		void setName(const std::string& name);
 		void pushMesh(const std::string& name, const Mesh& mesh);
+		
+		const Mesh& getMesh(const std::string& name) const;
 		
 	protected:
 		std::string	m_name;

@@ -11,6 +11,10 @@
 
 namespace TDZ {
 	
+	namespace {
+		static const Mesh NULL_MESH;
+	}
+	
 	void Model::setName(const std::string& name) {
 		m_name = name;
 	}
@@ -19,6 +23,18 @@ namespace TDZ {
 		m_meshMap[name] = mesh;
 	}
 	
+	const Mesh& Model::getMesh(const std::string& name) const {
+		if (m_meshMap.empty()) {
+			return NULL_MESH;
+		}
+
+		NameMeshMap::const_iterator pos(m_meshMap.find(name));
+		if (pos == m_meshMap.end()) {
+			return NULL_MESH;
+		}
+		return pos->second;
+	}
+
 	std::ostream& operator<<(std::ostream& outStream, const Model& model)
 	{
 		outStream << "Model: " << model.m_name;
