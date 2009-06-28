@@ -34,8 +34,7 @@ namespace TDZ {
 		VertexVec m_vertices;
 		VertexVec m_textureVertices;
 		VertexVec m_normals;
-		
-		friend class Model;
+
 		friend class FaceIterator;
 		friend std::ostream& operator<<(std::ostream& outStream, const Mesh& mesh);
 	};
