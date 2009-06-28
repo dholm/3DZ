@@ -19,7 +19,7 @@ namespace TDZ {
 	
 	class ObjModelFile {
 	public:
-		ObjModelFile();
+		virtual ~ObjModelFile() { };
 		
 		operator Model() const;
 		bool load(const std::string& path);

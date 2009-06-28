@@ -16,7 +16,12 @@ namespace TDZ {
 
 	class ModelFactory {
 	public:
+		virtual ~ModelFactory() { };
+		
 		static bool load(const std::string& path, Model& outModel);
+	
+	private:
+		ModelFactory() { };
 	};
 	
 } // TDZ

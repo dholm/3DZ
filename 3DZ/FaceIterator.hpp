@@ -14,6 +14,7 @@ namespace TDZ {
 	class FaceIterator {
 	public:
 		FaceIterator(const Mesh& meshRef);
+		virtual ~FaceIterator() { };
 		
 		FaceIterator& operator++();
 		const FaceIterator& operator++() const;
@@ -26,7 +27,7 @@ namespace TDZ {
 		const Mesh::Vertex& vertex() const;
 		const Mesh::Vertex& textureVertex() const;
 		const Mesh::Vertex& normal() const;
-				
+
 	private:
 		const Mesh& m_meshRef;
 		int m_currentVertex;

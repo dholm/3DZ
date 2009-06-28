@@ -7,6 +7,7 @@
  *
  */
 
+#include <iostream>
 #include <cassert>
 
 namespace TDZ {
@@ -35,6 +36,9 @@ namespace TDZ {
 			m_store.s.x = components[0];
 			m_store.s.y = components[1];
 			m_store.s.z = components[2];
+		}
+		
+		virtual ~Vector() {
 		}
 		
 		inline const ComponentT& operator[](const size_t i) const {
