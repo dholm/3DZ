@@ -18,9 +18,6 @@
 
 namespace TDZ {
 
-	ObjModelFile::ObjModelFile() {
-	}
-
 	ObjModelFile::operator Model() const {
 		Model model;
 
@@ -126,6 +123,7 @@ namespace TDZ {
 		
 		objGroup = ObjGroup();
 		std::getline(objStream, objGroup.m_name);
+		objGroup.m_name = trim(objGroup.m_name);
 	}
 
 	void ObjModelFile::pushGroup(const ObjGroup& objGroup) {
