@@ -47,6 +47,14 @@ namespace TDZ {
 			return m_store.a[i];
 		}
 		
+		ComponentT operator*(const Vector<ComponentN, ComponentT>& vector) const {
+			ComponentT scalar = 0;
+			for (std::size_t i = 0; i < ComponentN; ++i) {
+				scalar += m_store.a[i] * vector[i];
+			}
+			return scalar;
+		}
+		
 		friend std::ostream& operator<<(std::ostream& outStream, const Vector<ComponentN, ComponentT>& vector) {
 			outStream << "[";
 			for (std::size_t i = 0; i < ComponentN; ++i) {
