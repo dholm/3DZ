@@ -7,11 +7,13 @@
  *
  */
 
+#include <3DZ/Vector.hpp>
+
 #include "Mesh.hpp"
 
 namespace TDZ {
 
-	const Mesh::Vertex Mesh::NULL_VERTEX(0, 0, 0);
+	const Mesh::Vertex Mesh::NULL_VERTEX;
 	
 	void Mesh::pushVertex(const Vertex& vertex) {
 		m_vertices.push_back(vertex);
