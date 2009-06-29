@@ -7,38 +7,56 @@
  *
  */
 
-#include <iosfwd>
-
 #ifndef TDZ_MATRIX_HPP
 #define TDZ_MATRIX_HPP
 
+#include <iosfwd>
+
+#include <3DZ/Vector.hpp>
+
 namespace TDZ {
+
+	template <std::size_t M, std::size_t N, typename ComponentT> class Matrix;
 	
-	template <int M, int N, typename ComponentT>
+	template <std::size_t M, std::size_t N, typename ComponentT>
 	class Matrix {
 	public:
+		typedef Vector<N, ComponentT> Column;
+		
 		Matrix() :
-			m_store() { }
+			m_row() { }
 
-		Matrix(const ComponentT components[N * M]) :
-			m_store()
+		Matrix(const ComponentT* components) :
+			m_row()
 		{
-			for (int i = 0; i < (N * M); ++i) {
-				m_store.data[i] = components[i];
+			for (std::size_t row = 0; row < M; ++row) {
+				m_row[row].col = Column(&components[row * N]);
 			}
 		}
 		
+		const Column& operator[](std::size_t row) const {
+			return m_row[row].col;
+		}
+
+		Vector<M, ComponentT> operator*(const Vector<M, ComponentT>& vec) const {
+			Vector<M, ComponentT> result;
+			for (std::size_t i = 0; i < M; ++i) {
+				result[i] = m_row[i].col * vec;
+			}
+			return result;
+		}
+		
 		friend std::ostream& operator<<(std::ostream& outStream, const Matrix<M, N, ComponentT>& matrix) {
-			for (int n = 0; n < N; ++n) {
+			for (std::size_t row = 0; row < M; ++row) {
 				outStream << "[";
-				for (int m = 0; m < M; ++m) {
-					outStream << matrix.m_store.data[(n * M) + m];
-					if (m < (M - 1)) {
+				for (std::size_t col = 0; col < N; ++col) {
+					outStream << matrix.m_row[row].col[col];
+					if (col < (N - 1)) {
 						outStream << ",";
 					}
 				}
 				outStream << "]";
-				if (n < (N - 1)) {
+				if (row < (M - 1)) {
 					outStream << std::endl;
 				}
 			}
@@ -46,9 +64,9 @@ namespace TDZ {
 		}
 
 	private:
-		union {
-			ComponentT data[N * M] __attribute__ ((packed));
-		} m_store __attribute__ ((aligned (16)));
+		struct {
+			Column col;
+		} m_row[M] __attribute__ ((aligned (16)));
 	};
 
 } // TDZ
