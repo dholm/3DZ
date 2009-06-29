@@ -7,6 +7,9 @@
  *
  */
 
+#ifndef TDZ_VECTOR_HPP
+#define TDZ_VECTOR_HPP
+
 #include <iostream>
 #include <cassert>
 
@@ -74,3 +77,5 @@ namespace TDZ {
 	}
 	
 } // TDZ
+
+#endif /* TDZ_VECTOR_HPP */
