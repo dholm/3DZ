@@ -12,6 +12,7 @@
 #include <sstream>
 #include <iterator>
 
+#include <3DZ/Vector.hpp>
 #include <3DZ/StringUtils.hpp>
 
 #include "ObjModelFile.hpp"
