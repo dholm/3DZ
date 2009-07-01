@@ -15,51 +15,51 @@
 
 namespace TDZ {
 
-	template <std::size_t ComponentN, typename ComponentT> class Vector;
+	template <std::size_t N, typename ComponentT> class Vector;
 
-	template <std::size_t ComponentN, typename ComponentT>
+	template <std::size_t N, typename ComponentT>
 	class Vector {
 	public:
-		Vector() :
-			m_store()
+		explicit Vector(const ComponentT& value = 0) :
+			m_vector()
 		{
-			memset(&m_store.a[0], 0UL, sizeof(m_store));
+			for (std::size_t i = 0; i < N; ++i) {
+				m_vector.a[0] = value;
+			}
 		}
 		
-		Vector(const ComponentT* values) :
-			m_store()
+		explicit Vector(const ComponentT* values) :
+			m_vector()
 		{
-			for (std::size_t i = 0; i < ComponentN; ++i) {
-				m_store.a[i] = values[i];
-			}
+			memcpy(m_vector.a, values, N * sizeof(ComponentT));
 		}
 		
 		virtual ~Vector() {
 		}
 		
 		inline const ComponentT& operator[](const std::size_t i) const {
-			assert(i < ComponentN);
-			return m_store.a[i];
+			assert(i < N);
+			return m_vector.a[i];
 		}
 
 		inline ComponentT& operator[](const std::size_t i) {
-			assert(i < ComponentN);
-			return m_store.a[i];
+			assert(i < N);
+			return m_vector.a[i];
 		}
 		
-		ComponentT operator*(const Vector<ComponentN, ComponentT>& vector) const {
+		ComponentT operator*(const Vector<N, ComponentT>& vector) const {
 			ComponentT scalar = 0;
-			for (std::size_t i = 0; i < ComponentN; ++i) {
-				scalar += m_store.a[i] * vector[i];
+			for (std::size_t i = 0; i < N; ++i) {
+				scalar += m_vector.a[i] * vector[i];
 			}
 			return scalar;
 		}
 		
-		friend std::ostream& operator<<(std::ostream& outStream, const Vector<ComponentN, ComponentT>& vector) {
+		friend std::ostream& operator<<(std::ostream& outStream, const Vector<N, ComponentT>& vector) {
 			outStream << "[";
-			for (std::size_t i = 0; i < ComponentN; ++i) {
+			for (std::size_t i = 0; i < N; ++i) {
 				outStream << vector[i];
-				if (i < (ComponentN - 1)) {
+				if (i < (N - 1)) {
 					outStream << ", ";
 				}
 			}
@@ -69,8 +69,8 @@ namespace TDZ {
 		
 	private:
 		union {
-			ComponentT a[ComponentN] __attribute__ ((packed));
-		} m_store __attribute__ ((aligned (16)));
+			ComponentT a[N] __attribute__ ((packed));
+		} m_vector __attribute__ ((aligned (16)));
 	};
 		
 } // TDZ
