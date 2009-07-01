@@ -20,6 +20,7 @@
 		9ED393700FE59681008A9D41 /* StringUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED3936E0FE59681008A9D41 /* StringUtils.hpp */; };
 		9ED393710FE59681008A9D41 /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3936F0FE59681008A9D41 /* StringUtils.cpp */; };
 		9EE16B760FF7C6CE00AC4947 /* Matrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9EE16B740FF7C6CE00AC4947 /* Matrix.hpp */; };
+		9EE16DEE0FFBEC8C00AC4947 /* SmartPointer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9EE16DED0FFBEC8C00AC4947 /* SmartPointer.hpp */; };
 		9EE615C50FE53437007B13F7 /* Vector.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9EE615C30FE53437007B13F7 /* Vector.hpp */; };
 		9EE615FA0FE538ED007B13F7 /* StaticAssert.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9EE615F90FE538ED007B13F7 /* StaticAssert.hpp */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,7 @@
 		9ED3936E0FE59681008A9D41 /* StringUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StringUtils.hpp; sourceTree = "<group>"; };
 		9ED3936F0FE59681008A9D41 /* StringUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
 		9EE16B740FF7C6CE00AC4947 /* Matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
+		9EE16DED0FFBEC8C00AC4947 /* SmartPointer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SmartPointer.hpp; sourceTree = "<group>"; };
 		9EE615C30FE53437007B13F7 /* Vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vector.hpp; sourceTree = "<group>"; };
 		9EE615F90FE538ED007B13F7 /* StaticAssert.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StaticAssert.hpp; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* lib3DZ.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = lib3DZ.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +104,7 @@
 				9E43C7400FE6C49E00F92DCB /* Model.hpp */,
 				9E43C7410FE6C49E00F92DCB /* Model.cpp */,
 				9EE16B740FF7C6CE00AC4947 /* Matrix.hpp */,
+				9EE16DED0FFBEC8C00AC4947 /* SmartPointer.hpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -131,6 +134,7 @@
 				9E43C7490FE6C54E00F92DCB /* ModelFactory.hpp in Headers */,
 				9E43C74B0FE6C54E00F92DCB /* ObjModelFile.hpp in Headers */,
 				9EE16B760FF7C6CE00AC4947 /* Matrix.hpp in Headers */,
+				9EE16DEE0FFBEC8C00AC4947 /* SmartPointer.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
