@@ -57,6 +57,19 @@ namespace TDZ {
 			return result;
 		}
 		
+		template <std::size_t DstN>
+		Matrix<M, DstN, ComponentT> operator*(const Matrix<N, DstN, ComponentT>& rhs) const {
+			Matrix<M, DstN, ComponentT> result;
+			for (std::size_t row = 0; row < M; ++row) {
+				for (std::size_t col = 0; col < DstN; ++col) {
+					for (std::size_t r = 0; r < N; ++r) {
+						result[row][col] += m_matrix[row][r] * rhs[r][col];
+					}
+				}
+			}
+			return result;
+		}
+
 		friend std::ostream& operator<<(std::ostream& outStream, const Matrix<M, N, ComponentT>& matrix) {
 			for (std::size_t row = 0; row < M; ++row) {
 				outStream << "[";
