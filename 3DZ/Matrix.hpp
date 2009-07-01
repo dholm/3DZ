@@ -12,8 +12,6 @@
 
 #include <iosfwd>
 
-#include <3DZ/Vector.hpp>
-
 namespace TDZ {
 
 	template <std::size_t M, std::size_t N, typename ComponentT> class Matrix;
@@ -21,27 +19,32 @@ namespace TDZ {
 	template <std::size_t M, std::size_t N, typename ComponentT>
 	class Matrix {
 	public:
-		typedef Vector<N, ComponentT> Column;
-		
-		Matrix() :
-			m_row() { }
-
-		Matrix(const ComponentT* components) :
-			m_row()
+		explicit Matrix(const ComponentT& value = 0) :
+			m_matrix()
 		{
 			for (std::size_t row = 0; row < M; ++row) {
-				m_row[row].col = Column(&components[row * N]);
+				for (std::size_t col = 0; col < N; ++col) {
+					m_matrix[row][col] = value;
+				}
 			}
 		}
+
+		explicit Matrix(const ComponentT* components) :
+			m_matrix()
+		{
+			memcpy(m_matrix, components, M * N * sizeof(ComponentT));
+		}
 		
-		const Column& operator[](std::size_t row) const {
-			return m_row[row].col;
+		inline ComponentT* operator[](std::size_t row) {
+			return &m_matrix[row][0];
 		}
 
 		Vector<M, ComponentT> operator*(const Vector<M, ComponentT>& vec) const {
 			Vector<M, ComponentT> result;
-			for (std::size_t i = 0; i < M; ++i) {
-				result[i] = m_row[i].col * vec;
+			for (std::size_t row = 0; row < M; ++row) {
+				for (std::size_t col = 0; col < N; ++col) {
+					result[row] += m_matrix[row][col] * vec[row];
+				}
 			}
 			return result;
 		}
@@ -50,7 +53,7 @@ namespace TDZ {
 			for (std::size_t row = 0; row < M; ++row) {
 				outStream << "[";
 				for (std::size_t col = 0; col < N; ++col) {
-					outStream << matrix.m_row[row].col[col];
+					outStream << matrix.m_matrix[row][col];
 					if (col < (N - 1)) {
 						outStream << ",";
 					}
@@ -64,9 +67,7 @@ namespace TDZ {
 		}
 
 	private:
-		struct {
-			Column col;
-		} m_row[M] __attribute__ ((aligned (16)));
+		ComponentT __attribute__ ((packed)) m_matrix[M][N] __attribute__ ((aligned (16)));
 	};
 
 } // TDZ
