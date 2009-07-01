@@ -35,6 +35,14 @@ namespace TDZ {
 			memcpy(m_matrix, components, M * N * sizeof(ComponentT));
 		}
 		
+		operator const ComponentT*() const {
+			return &m_matrix[0][0];
+		}
+		
+		inline const ComponentT* const operator[](std::size_t row) const {
+			return &m_matrix[row][0];
+		}
+		
 		inline ComponentT* operator[](std::size_t row) {
 			return &m_matrix[row][0];
 		}
