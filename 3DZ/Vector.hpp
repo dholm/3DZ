@@ -15,8 +15,6 @@
 
 namespace TDZ {
 
-	template <std::size_t N, typename ComponentT> class Vector;
-
 	template <std::size_t N, typename ComponentT>
 	class Vector {
 	public:
@@ -47,7 +45,7 @@ namespace TDZ {
 			return m_vector.a[i];
 		}
 		
-		ComponentT operator*(const Vector<N, ComponentT>& vector) const {
+		ComponentT dot(const Vector<N, ComponentT>& vector) const {
 			ComponentT scalar = 0;
 			for (std::size_t i = 0; i < N; ++i) {
 				scalar += m_vector.a[i] * vector[i];
