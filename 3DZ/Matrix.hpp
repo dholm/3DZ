@@ -90,6 +90,17 @@ namespace TDZ {
 	private:
 		ComponentT __attribute__ ((packed)) m_matrix[M][N] __attribute__ ((aligned (16)));
 	};
+	
+	template<std::size_t M, typename ComponentT>
+	struct IdentityMatrix {
+		static Matrix<M, M, ComponentT> create() {
+			Matrix<M, M, ComponentT> matrix;
+			for (std::size_t i = 0; i < M; ++i) {
+				matrix[i][i] = ComponentT(1);
+			}
+			return matrix;
+		}
+	};
 
 } // TDZ
 
