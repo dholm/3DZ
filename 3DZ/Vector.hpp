@@ -53,6 +53,14 @@ namespace TDZ {
 			return scalar;
 		}
 		
+		Vector<N, ComponentT> cross(const Vector<N, ComponentT>& vector) const {
+			Vector<N, ComponentT> result;
+			for (std::size_t i = 0; i < N; ++i) {
+				result[i] = m_vector.a[i] * vector[i];
+			}
+			return result;
+		}
+		
 		friend std::ostream& operator<<(std::ostream& outStream, const Vector<N, ComponentT>& vector) {
 			outStream << "[";
 			for (std::size_t i = 0; i < N; ++i) {
