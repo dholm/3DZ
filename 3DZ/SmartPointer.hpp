@@ -26,11 +26,10 @@ namespace TDZ {
 		{
 		}
 		
-		~ResourceProxy() {
+		virtual ~ResourceProxy() {
 			assert(m_count == 0);
 		}
 
-		
 		int inc() {
 			return ++m_count;
 		}
@@ -40,6 +39,9 @@ namespace TDZ {
 			return --m_count;
 		}
 		
+		virtual T* get() = 0;
+		virtual const T* get() const = 0;
+
 		int m_count;
 
 		friend class SmartPointer<T, ResourceProxy<T> >;
@@ -59,6 +61,14 @@ namespace TDZ {
 			delete m_pointee;
 		}
 
+		T* get() {
+			return m_pointee;
+		}
+		
+		const T* get() const {
+			return m_pointee;
+		}
+
 		T* const m_pointee;
 
 		friend class SmartPointer<T, PointerProxy<T> >;
@@ -76,6 +86,14 @@ namespace TDZ {
 		
 		~ArrayProxy() {
 			delete [] m_pointee;
+		}
+		
+		T* get() {
+			return m_pointee;
+		}
+		
+		const T* get() const {
+			return m_pointee;
 		}
 		
 		T* const m_pointee;
@@ -140,19 +158,19 @@ namespace TDZ {
 		}
 		
 		const T* operator->() const {
-			return reinterpret_cast<const T*>(*this);
+			return reinterpret_cast<const T*>(m_resourceProxy->get());
 		}
 		
 		T* operator->() {
-			return reinterpret_cast<T*>(*this);
+			return reinterpret_cast<T*>(m_resourceProxy->get());
 		}
 		
 		const T& operator*() const {
-			return *reinterpret_cast<const T*>(*this);
+			return *reinterpret_cast<const T*>(m_resourceProxy->get());
 		}
 		
 		T& operator*() {
-			return *reinterpret_cast<T*>(*this);
+			return *reinterpret_cast<T*>(m_resourceProxy->get());
 		}
 		
 		void reset() {
