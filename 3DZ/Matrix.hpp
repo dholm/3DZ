@@ -13,13 +13,11 @@
 #include <iosfwd>
 
 namespace TDZ {
-
-	template <std::size_t M, std::size_t N, typename ComponentT> class Matrix;
 	
 	template <std::size_t M, std::size_t N, typename ComponentT>
 	class Matrix {
 	public:
-		explicit Matrix(const ComponentT& value = 0) :
+		explicit Matrix(const ComponentT& value = ComponentT(0)) :
 			m_matrix()
 		{
 			for (std::size_t row = 0; row < M; ++row) {
@@ -39,12 +37,12 @@ namespace TDZ {
 			return &m_matrix[0][0];
 		}
 		
-		inline const ComponentT* const operator[](std::size_t row) const {
-			return &m_matrix[row][0];
+		inline const ComponentT& operator()(std::size_t row, std::size_t column) const {
+			return m_matrix[row][column];
 		}
-		
-		inline ComponentT* operator[](std::size_t row) {
-			return &m_matrix[row][0];
+
+		inline ComponentT& operator()(std::size_t row, std::size_t column) {
+			return m_matrix[row][column];
 		}
 
 		Vector<M, ComponentT> operator*(const Vector<M, ComponentT>& vec) const {
@@ -63,7 +61,7 @@ namespace TDZ {
 			for (std::size_t row = 0; row < M; ++row) {
 				for (std::size_t col = 0; col < DstN; ++col) {
 					for (std::size_t r = 0; r < N; ++r) {
-						result[row][col] += m_matrix[row][r] * rhs[r][col];
+						result(row, col) += m_matrix[row][r] * rhs(r, col);
 					}
 				}
 			}
