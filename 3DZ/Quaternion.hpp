@@ -44,12 +44,12 @@ namespace TDZ {
 			return m_quaternion.a[i];
 		}
 		
-		Quaternion<ComponentT> operator*(const Quaternion<ComponentT>& quaternion) const {
+		Quaternion<ComponentT> cross(const Quaternion<ComponentT>& quaternion) const {
 			Quaternion<ComponentT> result(
+				m_quaternion.a[0] * quaternion[0] - m_quaternion.a[1] * quaternion[1] - m_quaternion.a[2] * quaternion[2] - m_quaternion.a[3] * quaternion[3],
 				m_quaternion.a[0] * quaternion[1] + m_quaternion.a[1] * quaternion[0] + m_quaternion.a[2] * quaternion[3] - m_quaternion.a[3] * quaternion[2],
-				m_quaternion.a[0] * quaternion[2] - m_quaternion.a[1] * quaternion[3] + m_quaternion.a[2] * quaternion[0] + m_quaternion.a[3] * quaternion[1],
-				m_quaternion.a[0] * quaternion[3] + m_quaternion.a[1] * quaternion[2] - m_quaternion.a[2] * quaternion[1] + m_quaternion.a[3] * quaternion[0],
-				m_quaternion.a[0] * quaternion[0] - m_quaternion.a[1] * quaternion[1] - m_quaternion.a[2] * quaternion[2] - m_quaternion.a[3] * quaternion[2]
+				m_quaternion.a[0] * quaternion[2] + m_quaternion.a[2] * quaternion[0] + m_quaternion.a[3] * quaternion[1] - m_quaternion.a[1] * quaternion[3],
+				m_quaternion.a[0] * quaternion[3] + m_quaternion.a[3] * quaternion[0] + m_quaternion.a[1] * quaternion[2] - m_quaternion.a[2] * quaternion[1]
 			);
 			return result;
 		}
@@ -67,9 +67,9 @@ namespace TDZ {
 			matrix(1, 2) = ComponentT(2) * m_quaternion.a[3] * m_quaternion.a[2] + ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[0];
 			matrix(1, 3) = ComponentT(0);
 			
-			matrix(2, 0) = ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[2] + ComponentT(2) * m_quaternion.a[2] * m_quaternion.a[0];
+			matrix(2, 0) = ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[3] + ComponentT(2) * m_quaternion.a[2] * m_quaternion.a[0];
 			matrix(2, 1) = ComponentT(2) * m_quaternion.a[3] * m_quaternion.a[2] - ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[0];
-			matrix(2, 2) = ComponentT(1) - ComponentT(2) * m_quaternion.a[0] * m_quaternion.a[0] - ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[1];
+			matrix(2, 2) = ComponentT(1) - ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[1] - ComponentT(2) * m_quaternion.a[2] * m_quaternion.a[2];
 			matrix(2, 3) = ComponentT(0);
 			
 			matrix(3, 0) = ComponentT(0);
@@ -111,7 +111,7 @@ namespace TDZ {
 	template <typename ComponentT>
 	struct RotationQuaternion {
 		static Quaternion<ComponentT> create(const ComponentT& radian, const Vector<3, ComponentT>& vector) {
-			const ComponentT halfRadian(radian / 2);
+			const ComponentT halfRadian(radian / ComponentT(2));
 			const ComponentT sinRadian(sin(halfRadian));
 			
 			return Quaternion<ComponentT>(
