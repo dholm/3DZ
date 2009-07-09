@@ -36,6 +36,38 @@ namespace TDZ {
 			m_quaternion.a[3] = vec[2];
 		}
 		
+		Quaternion(const Matrix<4, 4, ComponentT>& matrix) :
+			m_quaternion()
+		{
+			const ComponentT trace = matrix(0, 0) + matrix(1, 1) + matrix(2, 2) + matrix(3, 3);
+			
+			if (ComponentT(0) < trace) {
+				const ComponentT scale = sqrt(trace) * ComponentT(2);
+				m_quaternion.a[0] = ComponentT(0.25) * scale;
+				m_quaternion.a[1] = (matrix(2, 1) - matrix(1, 2)) / scale;
+				m_quaternion.a[2] = (matrix(0, 2) - matrix(2, 0)) / scale;
+				m_quaternion.a[3] = (matrix(1, 0) - matrix(0, 1)) / scale;
+			} else if (matrix(1, 1) < matrix(0, 0) && matrix(2, 2) < matrix(0, 0)) {
+				const ComponentT scale = sqrt(ComponentT(1) + matrix(0, 0) - matrix(1, 1) - matrix(2, 2)) * ComponentT(2);
+				m_quaternion.a[0] = (matrix(2, 1) - matrix(1, 2)) / scale;
+				m_quaternion.a[1] = ComponentT(0.25) * scale;
+				m_quaternion.a[2] = (matrix(0, 1) + matrix(1, 0)) / scale;
+				m_quaternion.a[3] = (matrix(2, 0) + matrix(0, 2)) / scale;
+			} else if (matrix(2, 2) < matrix(1, 1)) {
+				const ComponentT scale = sqrt(ComponentT(1) + matrix(1, 1) - matrix(0, 0) - matrix(2, 2)) * ComponentT(2);
+				m_quaternion.a[0] = (matrix(0, 2) - matrix(2, 0)) / scale;
+				m_quaternion.a[1] = (matrix(0, 1) + matrix(1, 0)) / scale;
+				m_quaternion.a[2] = ComponentT(0.25) * scale;
+				m_quaternion.a[3] = (matrix(1, 2) + matrix(2, 1)) / scale;
+			} else {
+				const ComponentT scale = sqrt(ComponentT(1) + matrix(2, 2) - matrix(0, 0) - matrix(1, 1)) * ComponentT(2);
+				m_quaternion.a[0] = (matrix(1, 0) - matrix(0, 1)) / scale;
+				m_quaternion.a[1] = (matrix(0, 2) + matrix(2, 0)) / scale;
+				m_quaternion.a[2] = (matrix(1, 2) + matrix(2, 1)) / scale;
+				m_quaternion.a[3] = ComponentT(0.25) * scale;
+			}
+		}
+		
 		inline const ComponentT& operator[](std::size_t i) const {
 			return m_quaternion.a[i];
 		}
