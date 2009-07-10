@@ -1,5 +1,5 @@
 /*
- *  TgaImage.hpp
+ *  TgaImageFile.hpp
  *  3DZ
  *
  *  Created by David Holm on 2009-07-10.
@@ -7,17 +7,17 @@
  *
  */
 
-#ifndef TDZ_TGAIMAGE_HPP
-#define TDZ_TGAIMAGE_HPP
+#ifndef TDZ_TgaImageFile_HPP
+#define TDZ_TgaImageFile_HPP
 
 #include <3DZ/Image.hpp>
 #include <3DZ/SmartPointer.hpp>
 
 namespace TDZ {
 
-	class TgaImage : public Image {
-	public:
-		virtual ~TgaImage() { };
+	class TgaImageFile : public Image {
+	public:		
+		virtual ~TgaImageFile() { };
 		
 		bool load(const std::string& path);
 		
@@ -31,9 +31,9 @@ namespace TDZ {
 		uint8_t	m_depth;
 		SharedArray<uint8_t>::Type m_imageData;
 		
-		friend std::ostream& operator<<(std::ostream& outStream, const TgaImage& tgaImage);
+		friend std::ostream& operator<<(std::ostream& outStream, const TgaImageFile& TgaImageFile);
 	};
 
 } // TDZ
 
-#endif /* TDZ_TGAIMAGE_HPP */
+#endif /* TDZ_TgaImageFile_HPP */

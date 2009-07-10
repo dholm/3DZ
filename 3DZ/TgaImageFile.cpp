@@ -1,5 +1,5 @@
 /*
- *  TgaImage.cpp
+ *  TgaImageFile.cpp
  *  3DZ
  *
  *  Created by David Holm on 2009-07-10.
@@ -13,11 +13,11 @@
 #include <cassert>
 
 #include "SmartPointer.hpp"
-#include "TgaImage.hpp"
+#include "TgaImageFile.hpp"
 
 namespace TDZ {
 
-	bool TgaImage::load(const std::string& path) {
+	bool TgaImageFile::load(const std::string& path) {
 		std::ifstream tgaFile(path.c_str());
 		if (!tgaFile) {
 			return false;
@@ -69,21 +69,21 @@ namespace TDZ {
 		return true;
 	}
 	
-	uint32_t TgaImage::getWidth() const {
+	uint32_t TgaImageFile::getWidth() const {
 		return m_width;
 	}
 	
-	uint32_t TgaImage::getHeight() const {
+	uint32_t TgaImageFile::getHeight() const {
 		return m_height;
 	}
 	
-	const uint8_t* TgaImage::getData() const {
+	const uint8_t* TgaImageFile::getData() const {
 		return m_imageData.get();
 	}
 
-	std::ostream& operator<<(std::ostream& outStream, const TgaImage& tgaImage)
+	std::ostream& operator<<(std::ostream& outStream, const TgaImageFile& TgaImageFile)
 	{
-		outStream << "[TGA " << tgaImage.m_width << "x" << tgaImage.m_height << "x" << static_cast<int>(tgaImage.m_depth) << "]";
+		outStream << "[TGA " << TgaImageFile.m_width << "x" << TgaImageFile.m_height << "x" << static_cast<int>(TgaImageFile.m_depth) << "]";
 		return outStream;
 	}
 	

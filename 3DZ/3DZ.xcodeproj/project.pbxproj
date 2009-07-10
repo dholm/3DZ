@@ -14,8 +14,8 @@
 		9E43C74A0FE6C54E00F92DCB /* ObjModelFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */; };
 		9E43C74B0FE6C54E00F92DCB /* ObjModelFile.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E43C7470FE6C54E00F92DCB /* ObjModelFile.hpp */; };
 		9E5C3C6A1007AD1100FE99C9 /* Image.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E5C3C691007AD1100FE99C9 /* Image.hpp */; };
-		9E5C3C6D1007AD6300FE99C9 /* TgaImage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E5C3C6B1007AD6300FE99C9 /* TgaImage.hpp */; };
-		9E5C3C6E1007AD6300FE99C9 /* TgaImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C3C6C1007AD6300FE99C9 /* TgaImage.cpp */; };
+		9E5C3CD51007E79A00FE99C9 /* TgaImageFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C3CD31007E79A00FE99C9 /* TgaImageFile.cpp */; };
+		9E5C3CD61007E79A00FE99C9 /* TgaImageFile.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E5C3CD41007E79A00FE99C9 /* TgaImageFile.hpp */; };
 		9ED392BF0FE5884B008A9D41 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED392B90FE5884B008A9D41 /* Mesh.cpp */; };
 		9ED392C00FE5884B008A9D41 /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED392BA0FE5884B008A9D41 /* Mesh.hpp */; };
 		9ED393320FE58C88008A9D41 /* FaceIterator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED393300FE58C88008A9D41 /* FaceIterator.hpp */; };
@@ -40,8 +40,8 @@
 		9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjModelFile.cpp; sourceTree = "<group>"; };
 		9E43C7470FE6C54E00F92DCB /* ObjModelFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjModelFile.hpp; sourceTree = "<group>"; };
 		9E5C3C691007AD1100FE99C9 /* Image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Image.hpp; sourceTree = "<group>"; };
-		9E5C3C6B1007AD6300FE99C9 /* TgaImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TgaImage.hpp; sourceTree = "<group>"; };
-		9E5C3C6C1007AD6300FE99C9 /* TgaImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TgaImage.cpp; sourceTree = "<group>"; };
+		9E5C3CD31007E79A00FE99C9 /* TgaImageFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TgaImageFile.cpp; sourceTree = "<group>"; };
+		9E5C3CD41007E79A00FE99C9 /* TgaImageFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TgaImageFile.hpp; sourceTree = "<group>"; };
 		9ED392B90FE5884B008A9D41 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		9ED392BA0FE5884B008A9D41 /* Mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		9ED393300FE58C88008A9D41 /* FaceIterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FaceIterator.hpp; sourceTree = "<group>"; };
@@ -96,6 +96,8 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9E5C3CD31007E79A00FE99C9 /* TgaImageFile.cpp */,
+				9E5C3CD41007E79A00FE99C9 /* TgaImageFile.hpp */,
 				9E43C7440FE6C54E00F92DCB /* ModelFactory.cpp */,
 				9E43C7450FE6C54E00F92DCB /* ModelFactory.hpp */,
 				9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */,
@@ -115,8 +117,6 @@
 				9EE16DED0FFBEC8C00AC4947 /* SmartPointer.hpp */,
 				9EDFE51910038076006FB975 /* Quaternion.hpp */,
 				9E5C3C691007AD1100FE99C9 /* Image.hpp */,
-				9E5C3C6B1007AD6300FE99C9 /* TgaImage.hpp */,
-				9E5C3C6C1007AD6300FE99C9 /* TgaImage.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -149,7 +149,7 @@
 				9EE16DEE0FFBEC8C00AC4947 /* SmartPointer.hpp in Headers */,
 				9EDFE51A10038076006FB975 /* Quaternion.hpp in Headers */,
 				9E5C3C6A1007AD1100FE99C9 /* Image.hpp in Headers */,
-				9E5C3C6D1007AD6300FE99C9 /* TgaImage.hpp in Headers */,
+				9E5C3CD61007E79A00FE99C9 /* TgaImageFile.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +202,7 @@
 				9E43C7430FE6C49E00F92DCB /* Model.cpp in Sources */,
 				9E43C7480FE6C54E00F92DCB /* ModelFactory.cpp in Sources */,
 				9E43C74A0FE6C54E00F92DCB /* ObjModelFile.cpp in Sources */,
-				9E5C3C6E1007AD6300FE99C9 /* TgaImage.cpp in Sources */,
+				9E5C3CD51007E79A00FE99C9 /* TgaImageFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
