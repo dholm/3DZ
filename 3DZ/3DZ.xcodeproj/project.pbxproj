@@ -13,6 +13,8 @@
 		9E43C7490FE6C54E00F92DCB /* ModelFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E43C7450FE6C54E00F92DCB /* ModelFactory.hpp */; };
 		9E43C74A0FE6C54E00F92DCB /* ObjModelFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */; };
 		9E43C74B0FE6C54E00F92DCB /* ObjModelFile.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E43C7470FE6C54E00F92DCB /* ObjModelFile.hpp */; };
+		9E5C3AD11007473500FE99C9 /* MtlMaterialFile.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E5C3ACF1007473500FE99C9 /* MtlMaterialFile.hpp */; };
+		9E5C3AD21007473500FE99C9 /* MtlMaterialFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C3AD01007473500FE99C9 /* MtlMaterialFile.cpp */; };
 		9E5C3AD51007477800FE99C9 /* Material.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E5C3AD41007477800FE99C9 /* Material.hpp */; };
 		9E5C3B4410074E8C00FE99C9 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C3B4310074E8C00FE99C9 /* Material.cpp */; };
 		9E5C3C6A1007AD1100FE99C9 /* Image.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E5C3C691007AD1100FE99C9 /* Image.hpp */; };
@@ -46,6 +48,8 @@
 		9E43C7450FE6C54E00F92DCB /* ModelFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModelFactory.hpp; sourceTree = "<group>"; };
 		9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjModelFile.cpp; sourceTree = "<group>"; };
 		9E43C7470FE6C54E00F92DCB /* ObjModelFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjModelFile.hpp; sourceTree = "<group>"; };
+		9E5C3ACF1007473500FE99C9 /* MtlMaterialFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MtlMaterialFile.hpp; sourceTree = "<group>"; };
+		9E5C3AD01007473500FE99C9 /* MtlMaterialFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MtlMaterialFile.cpp; sourceTree = "<group>"; };
 		9E5C3AD41007477800FE99C9 /* Material.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Material.hpp; sourceTree = "<group>"; };
 		9E5C3B4310074E8C00FE99C9 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		9E5C3C691007AD1100FE99C9 /* Image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Image.hpp; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				9EE16B740FF7C6CE00AC4947 /* Matrix.hpp */,
 				9EE16DED0FFBEC8C00AC4947 /* SmartPointer.hpp */,
 				9EDFE51910038076006FB975 /* Quaternion.hpp */,
+				9E5C3ACF1007473500FE99C9 /* MtlMaterialFile.hpp */,
+				9E5C3AD01007473500FE99C9 /* MtlMaterialFile.cpp */,
 				9E5C3AD41007477800FE99C9 /* Material.hpp */,
 				9E5C3B4310074E8C00FE99C9 /* Material.cpp */,
 				9E5C3CCD1007E55F00FE99C9 /* ImageFactory.hpp */,
@@ -169,6 +175,7 @@
 				9EE16B760FF7C6CE00AC4947 /* Matrix.hpp in Headers */,
 				9EE16DEE0FFBEC8C00AC4947 /* SmartPointer.hpp in Headers */,
 				9EDFE51A10038076006FB975 /* Quaternion.hpp in Headers */,
+				9E5C3AD11007473500FE99C9 /* MtlMaterialFile.hpp in Headers */,
 				9E5C3AD51007477800FE99C9 /* Material.hpp in Headers */,
 				9E5C3C6A1007AD1100FE99C9 /* Image.hpp in Headers */,
 				9E5C3CCF1007E55F00FE99C9 /* ImageFactory.hpp in Headers */,
@@ -226,6 +233,7 @@
 				9E43C7430FE6C49E00F92DCB /* Model.cpp in Sources */,
 				9E43C7480FE6C54E00F92DCB /* ModelFactory.cpp in Sources */,
 				9E43C74A0FE6C54E00F92DCB /* ObjModelFile.cpp in Sources */,
+				9E5C3AD21007473500FE99C9 /* MtlMaterialFile.cpp in Sources */,
 				9E5C3B4410074E8C00FE99C9 /* Material.cpp in Sources */,
 				9E5C3CD01007E55F00FE99C9 /* ImageFactory.cpp in Sources */,
 				9E5C3CD51007E79A00FE99C9 /* TgaImageFile.cpp in Sources */,
