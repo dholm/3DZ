@@ -7,8 +7,8 @@
  *
  */
 
-#include <3DZ/Vector.hpp>
-
+#include "Vector.hpp"
+#include "Image.hpp"
 #include "FaceIterator.hpp"
 
 namespace TDZ {

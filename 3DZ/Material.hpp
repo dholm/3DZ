@@ -19,7 +19,6 @@ namespace TDZ {
 
 	class Material {
 	public:
-		typedef SharedPointer<Material>::Type Pointer;
 		typedef Vector<3, float> Color;
 		
 		static const Material NULL_MATERIAL;
