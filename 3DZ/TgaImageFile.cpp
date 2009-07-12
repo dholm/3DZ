@@ -48,9 +48,9 @@ namespace TDZ {
 			return false;
 		}
 		
-		m_width = tgaFileHeader.imageSpecification.width;
-		m_height = tgaFileHeader.imageSpecification.height;
-		m_depth = tgaFileHeader.imageSpecification.depth;
+		setWidth(tgaFileHeader.imageSpecification.width);
+		setHeight(tgaFileHeader.imageSpecification.height);
+		setDepth(tgaFileHeader.imageSpecification.depth);
 		
 		SharedArray<uint8_t>::Type imageIdPointer(new uint8_t[tgaFileHeader.idLength]);
 		if (!tgaFile.read(reinterpret_cast<char*>(imageIdPointer.get()), sizeof(tgaFileHeader.idLength))) {
@@ -61,29 +61,18 @@ namespace TDZ {
 			assert(false);
 		}
 
-		m_imageData.reset(new uint8_t[m_width * m_height * (m_depth / 8)]);
-		if (!tgaFile.read(reinterpret_cast<char*>(m_imageData.get()), m_width * m_height * (m_depth / 8))) {
+		std::size_t dataSize(getWidth() * getHeight() * (getDepth() / 8));
+		getDataPointer().reset(new uint8_t[dataSize]);
+		if (!tgaFile.read(reinterpret_cast<char*>(getDataPointer().get()), dataSize)) {
 			return false;
 		}
 
 		return true;
 	}
 	
-	uint32_t TgaImageFile::getWidth() const {
-		return m_width;
-	}
-	
-	uint32_t TgaImageFile::getHeight() const {
-		return m_height;
-	}
-	
-	const uint8_t* TgaImageFile::getData() const {
-		return m_imageData.get();
-	}
-
 	std::ostream& operator<<(std::ostream& outStream, const TgaImageFile& TgaImageFile)
 	{
-		outStream << "[TGA " << TgaImageFile.m_width << "x" << TgaImageFile.m_height << "x" << static_cast<int>(TgaImageFile.m_depth) << "]";
+		outStream << "[TGA " << TgaImageFile.getWidth() << "x" << TgaImageFile.getHeight() << "x" << static_cast<int>(TgaImageFile.getDepth()) << "]";
 		return outStream;
 	}
 	
