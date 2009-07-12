@@ -50,14 +50,14 @@ namespace TDZ {
 	template <typename T>
 	class PointerProxy : public ResourceProxy<T> {
 	private:
-		PointerProxy(T* pointee) :
+		explicit PointerProxy(T* pointee) :
 			ResourceProxy<T>(),
 			m_pointee(pointee)
 		{
 			assert(pointee != NULL);
 		}
 		
-		~PointerProxy() {
+		virtual ~PointerProxy() {
 			delete m_pointee;
 		}
 
@@ -77,14 +77,14 @@ namespace TDZ {
 	template <typename T>
 	class ArrayProxy : public ResourceProxy<T> {
 	private:
-		ArrayProxy(T* pointee) :
+		explicit ArrayProxy(T* pointee) :
 			ResourceProxy<T>(),
 			m_pointee(pointee)
 		{
 			assert(pointee != NULL);
 		}
 		
-		~ArrayProxy() {
+		virtual ~ArrayProxy() {
 			delete [] m_pointee;
 		}
 		
@@ -117,7 +117,7 @@ namespace TDZ {
 			}
 		}
 		
-		explicit SmartPointer(const SmartPointer<T, ProxyT>& rhs) :
+		SmartPointer(const SmartPointer<T, ProxyT>& rhs) :
 			m_resourceProxy(rhs.m_resourceProxy)
 		{
 			if (m_resourceProxy) {
@@ -125,7 +125,7 @@ namespace TDZ {
 			}
 		}
 		
-		~SmartPointer() {
+		virtual ~SmartPointer() {
 			release();
 		}
 		
@@ -143,20 +143,29 @@ namespace TDZ {
 			return (m_resourceProxy != NULL);
 		}
 		
-		operator const T*() const {
+		const T* get() const {
 			if (m_resourceProxy) {
 				return m_resourceProxy->m_pointee;
 			}
 			throw std::runtime_error(std::string("Trying to dereference smart pointer of type ") + typeid(T).name());
+		}
+		
+		T* get() {
+
+			if (m_resourceProxy) {
+				return m_resourceProxy->m_pointee;
+			}
+			throw std::runtime_error(std::string("Trying to dereference smart pointer of type ") + typeid(T).name());
+		}
+
+		operator const T*() const {
+			return get();
 		}
 		
 		operator T*() {
-			if (m_resourceProxy) {
-				return m_resourceProxy->m_pointee;
-			}
-			throw std::runtime_error(std::string("Trying to dereference smart pointer of type ") + typeid(T).name());
+			return get();
 		}
-		
+
 		const T* operator->() const {
 			return reinterpret_cast<const T*>(m_resourceProxy->get());
 		}
