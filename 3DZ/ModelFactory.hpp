@@ -14,11 +14,10 @@
 
 namespace TDZ {
 
+	class TextureManager;
 	class ModelFactory {
 	public:
-		virtual ~ModelFactory() { };
-		
-		static bool load(const std::string& path, Model& outModel);
+		static bool load(const std::string& path, TextureManager& textureManager, Model::Pointer& outModel);
 	
 	private:
 		ModelFactory() { };

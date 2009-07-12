@@ -7,14 +7,16 @@
  *
  */
 
-#include <3DZ/Vector.hpp>
-#include <3DZ/ObjModelFile.hpp>
-
+#include "Vector.hpp"
+#include "Image.hpp"
+#include "Mesh.hpp"
+#include "Material.hpp"
+#include "ObjModelFile.hpp"
 #include "ModelFactory.hpp"
 
 namespace TDZ {
 	
-	bool ModelFactory::load(const std::string& path, Model& outModel) {
+	bool ModelFactory::load(const std::string& path, TextureManager& textureManager, Model::Pointer& outModel) {
 		std::string::size_type extPos(path.rfind('.'));
 		if (extPos == std::string::npos) {
 			return false;
@@ -22,11 +24,10 @@ namespace TDZ {
 		
 		std::string ext(path.substr(extPos + 1));
 		if (ext == "obj") {
-			ObjModelFile objModel;
-			if (!objModel.load(path)) {
+			outModel.reset(new ObjModelFile);
+			if (!dynamic_cast<ObjModelFile*>(outModel.get())->load(path, textureManager)) {
 				return false;
 			}
-			outModel = objModel;
 			return true;
 		}
 

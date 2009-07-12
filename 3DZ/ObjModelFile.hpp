@@ -12,19 +12,23 @@
 
 #include <iosfwd>
 #include <string>
+#include <vector>
+#include <map>
 
 #include <3DZ/Model.hpp>
 
 namespace TDZ {
 	
-	class ObjModelFile {
+	class Mesh;
+	class TextureManager;
+	
+	class ObjModelFile : public Model {
 	public:
-		virtual ~ObjModelFile() { };
-		
-		operator Model() const;
-		bool load(const std::string& path);
+		bool load(const std::string& path, TextureManager& textureManager);
 
 	private:
+		operator Model() const;
+
 		enum FaceType {
 			FaceType_V = 0,
 			FaceType_VT,
@@ -35,24 +39,19 @@ namespace TDZ {
 
 		struct ObjGroup {
 			std::string m_name;
+			std::string m_materialName;
 			FaceVec m_faces;
-			Mesh::VertexVec m_vertices;
-			Mesh::VertexVec m_textureVertices;
-			Mesh::VertexVec m_normals;
 		};
 		typedef std::map<std::string, ObjGroup> NameGroupMap;
 
-		void loadVertex(std::istream& objStream, ObjGroup& objGroup) const;
-		void loadTextureVertex(std::istream& objStream, ObjGroup& objGroup) const;
-		void loadNormal(std::istream& objStream, ObjGroup& objGroup) const;
+		void loadVertex(std::istream& objStream, Mesh::VertexVec& vertices);
+		void loadTextureVertex(std::istream& objStream, Mesh::VertexVec& textureVertices);
+		void loadNormal(std::istream& objStream, Mesh::VertexVec& normals);
 		bool loadFace(std::istream& objStream, ObjGroup& objGroup) const;
-		void loadGroup(std::istream& objStream, ObjGroup& objGroup);
+		void loadGroup(std::istream& objStream, ObjGroup& objGroup, NameGroupMap& groupMap);
+		bool loadMaterial(std::istream& inStream, const std::string& basePath);
 
-		void pushGroup(const ObjGroup& objGroup);
-		void groupToMesh(const ObjGroup& group, Mesh& outMesh) const;
-		
-		std::string m_name;
-		NameGroupMap m_groupMap;
+		void pushGroup(const ObjGroup& objGroup, NameGroupMap& groupMap);
 	};
 	
 } // TDZ

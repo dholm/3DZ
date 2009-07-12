@@ -12,9 +12,13 @@
 #include <sstream>
 #include <iterator>
 
-#include <3DZ/Vector.hpp>
-#include <3DZ/StringUtils.hpp>
-
+#include "Vector.hpp"
+#include "StringUtils.hpp"
+#include "TextureManager.hpp"
+#include "Mesh.hpp"
+#include "Material.hpp"
+#include "Model.hpp"
+#include "MtlMaterialFile.hpp"
 #include "ObjModelFile.hpp"
 
 namespace TDZ {
@@ -24,41 +28,53 @@ namespace TDZ {
 
 		model.setName(m_name);
 
-		for (NameGroupMap::const_iterator it(m_groupMap.begin()); it != m_groupMap.end(); ++it) {
-			Mesh mesh;
-			groupToMesh(it->second, mesh);
-			model.pushMesh(it->first, mesh);
-		}
 		return model;
 	}
 
-	bool ObjModelFile::load(const std::string& path) {
+	bool ObjModelFile::load(const std::string& path, TextureManager& textureManager) {
 		std::ifstream objFile(path.c_str());
 		if (!objFile) {
 			return false;
 		}
 
+		Mesh::VertexVec vertices;
+		Mesh::VertexVec textureVertices;
+		Mesh::VertexVec normals;
+		NameGroupMap groupMap;
+		
 		ObjGroup objGroup;
 		std::string word;
 		for (std::string word; objFile >> word; ) {
 			if (word == "v") {
-				loadVertex(objFile, objGroup);
+				loadVertex(objFile, vertices);
 			} else if (word == "vt") {
-				loadTextureVertex(objFile, objGroup);
+				loadTextureVertex(objFile, textureVertices);
 			} else if (word == "vn") {
-				loadNormal(objFile, objGroup);
+				loadNormal(objFile, normals);
 			} else if (word == "f") {
 				if (!loadFace(objFile, objGroup)) {
 					return false;
 				}
 			} else if (word == "g") {
-				loadGroup(objFile, objGroup);
+				loadGroup(objFile, objGroup, groupMap);
 			} else if (word == "o") {
-				std::getline(objFile, m_name);
-				m_name = trim(m_name);
+				std::getline(objFile, word);
+				setName(trim(word));
 			} else if (word == "mtllib") {
-				/* Load material */
-				assert(false);
+				if (!(objFile >> word)) {
+					return false;
+				}
+				
+				MtlMaterialFile materialFile;
+				const std::string materialFilePath((path.substr(0, path.find_last_of("/")) + "/") + trim(word));
+				if (!materialFile.load(materialFilePath, textureManager, *this)) {
+					return false;
+				}
+			} else if (word == "usemtl") {
+				if (!(objFile >> word)) {
+					return false;
+				}
+				objGroup.m_materialName = trim(word);
 			} else {
 				/* Skip */
 				std::string line;
@@ -66,30 +82,46 @@ namespace TDZ {
 			}
 			word.clear();
 		}
-		pushGroup(objGroup);
+		pushGroup(objGroup, groupMap);
+		
+		for (NameGroupMap::const_iterator it(groupMap.begin()); it != groupMap.end(); ++it) {
+			Mesh mesh;
+			mesh.setMaterialName(it->second.m_materialName);
+			for (FaceVec::const_iterator faceIt(it->second.m_faces.begin()); faceIt != it->second.m_faces.end(); ++faceIt) {
+				if (0 <= (*faceIt)[0] && (*faceIt)[0] < vertices.size()) {
+					mesh.pushVertex(vertices[(*faceIt)[0]]);
+				}
+				if (0 <= (*faceIt)[1] && (*faceIt)[1] < textureVertices.size()) {
+					mesh.pushTextureVertex(textureVertices[(*faceIt)[1]]);
+				}
+				if (0 <= (*faceIt)[2] && (*faceIt)[2] < normals.size()) {
+					mesh.pushNormal(normals[(*faceIt)[2]]);
+				}
+			}
+			pushMesh(it->first, mesh);
+		}
 		
 		return true;
 	}
 	
-	void ObjModelFile::loadVertex(std::istream& objStream, ObjGroup& objGroup) const {
+	void ObjModelFile::loadVertex(std::istream& objStream, Mesh::VertexVec& vertices) {
 		Mesh::Vertex v;
 		v[0] = v[1] = v[2] = 0.0f;
 		objStream >> v[0] >> v[1] >> v[2];
-		objGroup.m_vertices.push_back(v);
+		vertices.push_back(v);
 	}
 
-	void ObjModelFile::loadTextureVertex(std::istream& objStream, ObjGroup& objGroup) const {
+	void ObjModelFile::loadTextureVertex(std::istream& objStream, Mesh::VertexVec& textureVertices) {
 		Mesh::Vertex v;
-		v[0] = v[1] = v[2] = 0.0f;
-		objStream >> v[0] >> v[1] >> v[2];
-		objGroup.m_textureVertices.push_back(v);
+		objStream >> v[0] >> v[1];
+		textureVertices.push_back(v);
 	}
 
-	void ObjModelFile::loadNormal(std::istream& objStream, ObjGroup& objGroup) const {
+	void ObjModelFile::loadNormal(std::istream& objStream, Mesh::VertexVec& normals) {
 		Mesh::Vertex v;
 		v[0] = v[1] = v[2] = 0.0f;
 		objStream >> v[0] >> v[1] >> v[2];
-		objGroup.m_normals.push_back(v);
+		normals.push_back(v);
 	}
 	
 	bool ObjModelFile::loadFace(std::istream& objStream, ObjGroup& objGroup) const {
@@ -104,14 +136,14 @@ namespace TDZ {
 			Face face;
 			int type = FaceType_V;
 			std::stringstream faceStrStream(*it);
+			char slash('/');
 			while (faceStrStream) {
-				char slash('/');
 				faceStrStream >> face[type] >> slash;
 				--face[type++];
-				
-				if (FaceType_VN < type) {
+
+				if (FaceType_VN < type && faceStrStream) {
 					return false;
-				}
+				}				
 			}
 			objGroup.m_faces.push_back(face);
 		}
@@ -119,31 +151,18 @@ namespace TDZ {
 		return true;
 	}
 
-	void ObjModelFile::loadGroup(std::istream& objStream, ObjGroup& objGroup) {
-		pushGroup(objGroup);
+	void ObjModelFile::loadGroup(std::istream& objStream, ObjGroup& objGroup, NameGroupMap& groupMap) {
+		pushGroup(objGroup, groupMap);
 		
 		objGroup = ObjGroup();
 		std::getline(objStream, objGroup.m_name);
 		objGroup.m_name = trim(objGroup.m_name);
 	}
-
-	void ObjModelFile::pushGroup(const ObjGroup& objGroup) {
-		if (!objGroup.m_name.empty()) {
-			m_groupMap[objGroup.m_name] = objGroup;
+	
+	void ObjModelFile::pushGroup(const ObjGroup& objGroup, NameGroupMap& groupMap) {
+		if (!objGroup.m_name.empty() && !objGroup.m_faces.empty()) {
+			groupMap[objGroup.m_name] = objGroup;
 		}
 	}
 	
-	void ObjModelFile::groupToMesh(const ObjGroup& group, Mesh& outMesh) const {
-		for (FaceVec::const_iterator it(group.m_faces.begin()); it != group.m_faces.end(); ++it) {
-			if (0 <= (*it)[0] && (*it)[0] < group.m_vertices.size()) {
-				outMesh.pushVertex(group.m_vertices[(*it)[0]]);
-			}
-			if (0 <= (*it)[1] && (*it)[1] < group.m_textureVertices.size()) {
-				outMesh.pushTextureVertex(group.m_textureVertices[(*it)[1]]);
-			}
-			if (0 <= (*it)[2] && (*it)[2] < group.m_normals.size()) {
-				outMesh.pushNormal(group.m_normals[(*it)[2]]);
-			}
-		}
-	}
 } // TDZ
