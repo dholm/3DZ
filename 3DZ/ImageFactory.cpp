@@ -12,7 +12,7 @@
 
 namespace TDZ {
 	
-	bool ImageFactory::load(const std::string& path, Image& outImage) {
+	bool ImageFactory::load(const std::string& path, Image::Pointer& outImage) {
 		std::string::size_type extPos(path.rfind('.'));
 		if (extPos == std::string::npos) {
 			return false;
@@ -20,11 +20,10 @@ namespace TDZ {
 		
 		std::string ext(path.substr(extPos + 1));
 		if (ext == "tga") {
-			TgaImageFile tgaImage;
-			if (!tgaImage.load(path)) {
+			outImage.reset(new TgaImageFile);
+			if (!dynamic_cast<TgaImageFile*>(outImage.get())->load(path)) {
 				return false;
 			}
-			outImage = tgaImage;
 			return true;
 		}
 		

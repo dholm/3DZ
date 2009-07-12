@@ -13,9 +13,10 @@
 #include <map>
 #include <string>
 
+#include <3DZ/Image.hpp>
+
 namespace TDZ {
 
-	class Image;
 	class TextureManager {
 	public:
 		TextureManager(const std::string& texturePath);
@@ -26,7 +27,7 @@ namespace TDZ {
 		const Image* get(const std::string& name) const;
 		
 	private:
-		typedef std::map<std::string, Image> NameImageMap;
+		typedef std::map<std::string, Image::Pointer> NameImageMap;
 		
 		std::string m_texturePath;
 		NameImageMap m_textureMap;

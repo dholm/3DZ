@@ -23,11 +23,11 @@ namespace TDZ {
 	}
 		
 	bool TextureManager::load(const std::string& name) {
-		Image image;
-		if (!ImageFactory::load(m_texturePath + "/" + name, image)) {
+		Image::Pointer imagePointer;
+		if (!ImageFactory::load(m_texturePath + "/" + name, imagePointer)) {
 			return false;
 		}
-		m_textureMap[name] = image;
+		m_textureMap[name] = imagePointer;
 		return true;
 	}
 	
@@ -58,7 +58,7 @@ namespace TDZ {
 		if (pos == m_textureMap.end()) {
 			return NULL;
 		}
-		return &pos->second;
+		return &(*pos->second);
 	}
 
 } // TDZ

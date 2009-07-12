@@ -18,27 +18,14 @@ namespace TDZ {
 	
 	class Image {
 	public:
+		typedef SharedPointer<Image>::Type Pointer;
+		
 		virtual ~Image() { };
 		
-		virtual uint32_t getWidth() const;
-		virtual uint32_t getHeight() const;
-		virtual uint8_t getDepth() const;
-		virtual const uint8_t* getData() const;
-		
-	protected:
-		typedef SharedArray<uint8_t>::Type ImageDataPointer;
-		
-		void setWidth(uint16_t width);
-		void setHeight(uint16_t height);
-		void setDepth(uint8_t depth);
-		
-		ImageDataPointer& getDataPointer();
-		
-	private:
-		uint16_t m_width;
-		uint16_t m_height;
-		uint8_t	m_depth;
-		ImageDataPointer m_imageData;
+		virtual uint32_t getWidth() const = 0;
+		virtual uint32_t getHeight() const = 0;
+		virtual uint8_t getDepth() const = 0;
+		virtual const uint8_t* getData() const = 0;
 	};
 	
 	std::ostream& operator<<(std::ostream& outStream, const Image& image);

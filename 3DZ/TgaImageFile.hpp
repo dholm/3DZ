@@ -20,7 +20,19 @@ namespace TDZ {
 		virtual ~TgaImageFile() { };
 		
 		bool load(const std::string& path);
-				
+		
+		uint32_t getWidth() const;
+		uint32_t getHeight() const;
+		uint8_t getDepth() const;
+		const uint8_t* getData() const;
+		
+	private:
+		typedef SharedArray<uint8_t>::Type ImageDataPointer;
+		uint16_t m_width;
+		uint16_t m_height;
+		uint8_t	m_depth;
+		ImageDataPointer m_imageData;
+
 		friend std::ostream& operator<<(std::ostream& outStream, const TgaImageFile& TgaImageFile);
 	};
 

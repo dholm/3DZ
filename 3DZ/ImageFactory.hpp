@@ -14,7 +14,7 @@ namespace TDZ {
 	
 	class ImageFactory {
 	public:
-		static bool load(const std::string& path, Image& outImage);
+		static bool load(const std::string& path, Image::Pointer& outImage);
 		
 	private:
 		ImageFactory() { }
