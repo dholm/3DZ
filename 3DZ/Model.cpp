@@ -7,15 +7,11 @@
  *
  */
 
-#include <3DZ/Vector.hpp>
-
+#include "Vector.hpp"
+#include "Image.hpp"
 #include "Model.hpp"
 
 namespace TDZ {
-	
-	namespace {
-		static const Mesh NULL_MESH;
-	}
 	
 	void Model::setName(const std::string& name) {
 		m_name = name;
@@ -25,14 +21,30 @@ namespace TDZ {
 		m_meshMap[name] = mesh;
 	}
 	
+	void Model::pushMaterial(const Material& material) {
+		m_materialMap[material.getName()] = material;
+	}
+
 	const Mesh& Model::getMesh(const std::string& name) const {
 		if (m_meshMap.empty()) {
-			return NULL_MESH;
+			return Mesh::NULL_MESH;
 		}
 
 		NameMeshMap::const_iterator pos(m_meshMap.find(name));
 		if (pos == m_meshMap.end()) {
-			return NULL_MESH;
+			return Mesh::NULL_MESH;
+		}
+		return pos->second;
+	}
+	
+	const Material& Model::getMaterial(const std::string& name) const {
+		if (m_materialMap.empty()) {
+			return Material::NULL_MATERIAL;
+		}
+		
+		NameMaterialMap::const_iterator pos(m_materialMap.find(name));
+		if (pos == m_materialMap.end()) {
+			return Material::NULL_MATERIAL;
 		}
 		return pos->second;
 	}

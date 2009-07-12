@@ -23,14 +23,19 @@ namespace TDZ {
 		typedef std::vector<Vertex> VertexVec;
 
 		static const Vertex NULL_VERTEX;
-		
+		static const Mesh NULL_MESH;
+
 		virtual ~Mesh() { };
 		
 		void pushVertex(const Vertex& vertex);
 		void pushTextureVertex(const Vertex& textureVertex);
 		void pushNormal(const Vertex& normal);
 		
+		const std::string getMaterialName() const;
+		void setMaterialName(const std::string& materialName);
+		
 	private:
+		std::string m_materialName;
 		VertexVec m_vertices;
 		VertexVec m_textureVertices;
 		VertexVec m_normals;
