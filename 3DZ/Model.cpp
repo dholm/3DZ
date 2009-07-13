@@ -17,6 +17,10 @@ namespace TDZ {
 		m_name = name;
 	}
 	
+	const std::string& Model::getName() const {
+		return m_name;
+	}
+	
 	void Model::pushMesh(const std::string& name, const Mesh& mesh) {
 		m_meshMap[name] = mesh;
 	}

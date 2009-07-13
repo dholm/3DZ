@@ -29,6 +29,8 @@ namespace TDZ {
 		virtual ~Model() { };
 		
 		void setName(const std::string& name);
+		const std::string& getName() const;
+		
 		void pushMesh(const std::string& name, const Mesh& mesh);
 		
 		void pushMaterial(const Material& material);
