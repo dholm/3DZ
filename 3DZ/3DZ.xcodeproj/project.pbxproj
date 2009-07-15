@@ -27,6 +27,8 @@
 		9E5C3E24100954C300FE99C9 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C3E22100954C300FE99C9 /* TextureManager.cpp */; };
 		9E5C4010100B3EB800FE99C9 /* ModelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C400E100B3EB800FE99C9 /* ModelManager.cpp */; };
 		9E5C4011100B3EB800FE99C9 /* ModelManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E5C400F100B3EB800FE99C9 /* ModelManager.hpp */; };
+		9E86CBAA100E571800CC9EF6 /* Scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E86CBA8100E571800CC9EF6 /* Scene.hpp */; };
+		9E86CBAB100E571800CC9EF6 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E86CBA9100E571800CC9EF6 /* Scene.cpp */; };
 		9ED392BF0FE5884B008A9D41 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED392B90FE5884B008A9D41 /* Mesh.cpp */; };
 		9ED392C00FE5884B008A9D41 /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED392BA0FE5884B008A9D41 /* Mesh.hpp */; };
 		9ED393320FE58C88008A9D41 /* FaceIterator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED393300FE58C88008A9D41 /* FaceIterator.hpp */; };
@@ -64,6 +66,8 @@
 		9E5C3E22100954C300FE99C9 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		9E5C400E100B3EB800FE99C9 /* ModelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelManager.cpp; sourceTree = "<group>"; };
 		9E5C400F100B3EB800FE99C9 /* ModelManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModelManager.hpp; sourceTree = "<group>"; };
+		9E86CBA8100E571800CC9EF6 /* Scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
+		9E86CBA9100E571800CC9EF6 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		9ED392B90FE5884B008A9D41 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		9ED392BA0FE5884B008A9D41 /* Mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		9ED393300FE58C88008A9D41 /* FaceIterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FaceIterator.hpp; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9E86CBA7100E56FE00CC9EF6 /* SceneGraph */,
 				9E86CB4B100E035200CC9EF6 /* Graphics */,
 				9E86CB47100E031C00CC9EF6 /* Geometry */,
 				9E86CB41100E02E800CC9EF6 /* Utils */,
@@ -195,6 +200,15 @@
 			name = Graphics;
 			sourceTree = "<group>";
 		};
+		9E86CBA7100E56FE00CC9EF6 /* SceneGraph */ = {
+			isa = PBXGroup;
+			children = (
+				9E86CBA8100E571800CC9EF6 /* Scene.hpp */,
+				9E86CBA9100E571800CC9EF6 /* Scene.cpp */,
+			);
+			name = SceneGraph;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -220,6 +234,7 @@
 				9E5C3CD61007E79A00FE99C9 /* TgaImageFile.hpp in Headers */,
 				9E5C3E23100954C300FE99C9 /* TextureManager.hpp in Headers */,
 				9E5C4011100B3EB800FE99C9 /* ModelManager.hpp in Headers */,
+				9E86CBAA100E571800CC9EF6 /* Scene.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +294,7 @@
 				9E5C3D1E1007EC4300FE99C9 /* Image.cpp in Sources */,
 				9E5C3E24100954C300FE99C9 /* TextureManager.cpp in Sources */,
 				9E5C4010100B3EB800FE99C9 /* ModelManager.cpp in Sources */,
+				9E86CBAB100E571800CC9EF6 /* Scene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
