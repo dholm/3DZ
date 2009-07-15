@@ -7,6 +7,13 @@
  *
  */
 
+#ifndef TDZ_STRINGUTILS_HPP
+#define TDZ_STRINGUTILS_HPP
+
 namespace TDZ {
+	
 	std::string trim(const std::string& str);
+
 } // TDZ
+
+#endif /* TDZ_STRINGUTILS_HPP */
