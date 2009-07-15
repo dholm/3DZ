@@ -118,38 +118,11 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				9E5C400E100B3EB800FE99C9 /* ModelManager.cpp */,
-				9E5C400F100B3EB800FE99C9 /* ModelManager.hpp */,
-				9E5C3CD31007E79A00FE99C9 /* TgaImageFile.cpp */,
-				9E5C3CD41007E79A00FE99C9 /* TgaImageFile.hpp */,
-				9E43C7440FE6C54E00F92DCB /* ModelFactory.cpp */,
-				9E43C7450FE6C54E00F92DCB /* ModelFactory.hpp */,
-				9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */,
-				9E43C7470FE6C54E00F92DCB /* ObjModelFile.hpp */,
-				9ED392B90FE5884B008A9D41 /* Mesh.cpp */,
-				9ED392BA0FE5884B008A9D41 /* Mesh.hpp */,
-				9EE615C30FE53437007B13F7 /* Vector.hpp */,
+				9E86CB4B100E035200CC9EF6 /* Graphics */,
+				9E86CB47100E031C00CC9EF6 /* Geometry */,
+				9E86CB41100E02E800CC9EF6 /* Utils */,
+				9E86CB40100E02CC00CC9EF6 /* Math */,
 				32BAE0B70371A74B00C91783 /* 3DZ_Prefix.pch */,
-				9EE615F90FE538ED007B13F7 /* StaticAssert.hpp */,
-				9ED393300FE58C88008A9D41 /* FaceIterator.hpp */,
-				9ED393310FE58C88008A9D41 /* FaceIterator.cpp */,
-				9ED3936E0FE59681008A9D41 /* StringUtils.hpp */,
-				9ED3936F0FE59681008A9D41 /* StringUtils.cpp */,
-				9E43C7400FE6C49E00F92DCB /* Model.hpp */,
-				9E43C7410FE6C49E00F92DCB /* Model.cpp */,
-				9EE16B740FF7C6CE00AC4947 /* Matrix.hpp */,
-				9EE16DED0FFBEC8C00AC4947 /* SmartPointer.hpp */,
-				9EDFE51910038076006FB975 /* Quaternion.hpp */,
-				9E5C3ACF1007473500FE99C9 /* MtlMaterialFile.hpp */,
-				9E5C3AD01007473500FE99C9 /* MtlMaterialFile.cpp */,
-				9E5C3AD41007477800FE99C9 /* Material.hpp */,
-				9E5C3B4310074E8C00FE99C9 /* Material.cpp */,
-				9E5C3CCD1007E55F00FE99C9 /* ImageFactory.hpp */,
-				9E5C3CCE1007E55F00FE99C9 /* ImageFactory.cpp */,
-				9E5C3C691007AD1100FE99C9 /* Image.hpp */,
-				9E5C3D1D1007EC4300FE99C9 /* Image.cpp */,
-				9E5C3E21100954C300FE99C9 /* TextureManager.hpp */,
-				9E5C3E22100954C300FE99C9 /* TextureManager.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -161,6 +134,65 @@
 				5073E0C709E734A800EC74B6 /* 3DZTarget.xcconfig */,
 			);
 			name = "Configuration Files";
+			sourceTree = "<group>";
+		};
+		9E86CB40100E02CC00CC9EF6 /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				9EE615C30FE53437007B13F7 /* Vector.hpp */,
+				9EE16B740FF7C6CE00AC4947 /* Matrix.hpp */,
+				9EDFE51910038076006FB975 /* Quaternion.hpp */,
+			);
+			name = Math;
+			sourceTree = "<group>";
+		};
+		9E86CB41100E02E800CC9EF6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9EE615F90FE538ED007B13F7 /* StaticAssert.hpp */,
+				9EE16DED0FFBEC8C00AC4947 /* SmartPointer.hpp */,
+				9ED3936E0FE59681008A9D41 /* StringUtils.hpp */,
+				9ED3936F0FE59681008A9D41 /* StringUtils.cpp */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		9E86CB47100E031C00CC9EF6 /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				9E5C3ACF1007473500FE99C9 /* MtlMaterialFile.hpp */,
+				9E5C3AD01007473500FE99C9 /* MtlMaterialFile.cpp */,
+				9E5C3AD41007477800FE99C9 /* Material.hpp */,
+				9E5C3B4310074E8C00FE99C9 /* Material.cpp */,
+				9E5C400E100B3EB800FE99C9 /* ModelManager.cpp */,
+				9E5C400F100B3EB800FE99C9 /* ModelManager.hpp */,
+				9E43C7440FE6C54E00F92DCB /* ModelFactory.cpp */,
+				9E43C7450FE6C54E00F92DCB /* ModelFactory.hpp */,
+				9E43C7460FE6C54E00F92DCB /* ObjModelFile.cpp */,
+				9E43C7470FE6C54E00F92DCB /* ObjModelFile.hpp */,
+				9ED392B90FE5884B008A9D41 /* Mesh.cpp */,
+				9ED392BA0FE5884B008A9D41 /* Mesh.hpp */,
+				9ED393300FE58C88008A9D41 /* FaceIterator.hpp */,
+				9ED393310FE58C88008A9D41 /* FaceIterator.cpp */,
+				9E43C7400FE6C49E00F92DCB /* Model.hpp */,
+				9E43C7410FE6C49E00F92DCB /* Model.cpp */,
+			);
+			name = Geometry;
+			sourceTree = "<group>";
+		};
+		9E86CB4B100E035200CC9EF6 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				9E5C3CD31007E79A00FE99C9 /* TgaImageFile.cpp */,
+				9E5C3CD41007E79A00FE99C9 /* TgaImageFile.hpp */,
+				9E5C3CCD1007E55F00FE99C9 /* ImageFactory.hpp */,
+				9E5C3CCE1007E55F00FE99C9 /* ImageFactory.cpp */,
+				9E5C3C691007AD1100FE99C9 /* Image.hpp */,
+				9E5C3D1D1007EC4300FE99C9 /* Image.cpp */,
+				9E5C3E21100954C300FE99C9 /* TextureManager.hpp */,
+				9E5C3E22100954C300FE99C9 /* TextureManager.cpp */,
+			);
+			name = Graphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
