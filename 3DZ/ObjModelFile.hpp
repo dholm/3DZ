@@ -16,11 +16,10 @@
 #include <map>
 
 #include <3DZ/Model.hpp>
+#include <3DZ/Mesh.hpp>
+#include <3DZ/TextureManager.hpp>
 
 namespace TDZ {
-	
-	class Mesh;
-	class TextureManager;
 	
 	class ObjModelFile : public Model {
 	public:

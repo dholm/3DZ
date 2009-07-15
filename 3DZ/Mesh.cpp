@@ -7,7 +7,6 @@
  *
  */
 
-#include "Vector.hpp"
 #include "Image.hpp"
 #include "Material.hpp"
 #include "Mesh.hpp"

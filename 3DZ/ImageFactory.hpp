@@ -10,6 +10,8 @@
 #ifndef TDZ_IMAGEFACTORY_HPP
 #define TDZ_IMAGEFACTORY_HPP
 
+#include <3DZ/Image.hpp>
+
 namespace TDZ {
 	
 	class ImageFactory {

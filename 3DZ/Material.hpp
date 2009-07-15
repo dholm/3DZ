@@ -11,6 +11,7 @@
 #define TDZ_MATERIAL_HPP
 
 #include <3DZ/SmartPointer.hpp>
+#include <3DZ/Vector.hpp>
 
 namespace TDZ {
 

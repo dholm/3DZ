@@ -7,7 +7,6 @@
  *
  */
 
-#include "Vector.hpp"
 #include "Material.hpp"
 
 namespace TDZ {

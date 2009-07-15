@@ -15,10 +15,7 @@
 
 #include "StringUtils.hpp"
 #include "Vector.hpp"
-#include "TextureManager.hpp"
 #include "Mesh.hpp"
-#include "Model.hpp"
-#include "Material.hpp"
 #include "ImageFactory.hpp"
 #include "MtlMaterialFile.hpp"
 

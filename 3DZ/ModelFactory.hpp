@@ -11,10 +11,10 @@
 #define TDZ_MODELFACTORY_HPP
 
 #include <3DZ/Model.hpp>
+#include <3DZ/TextureManager.hpp>
 
 namespace TDZ {
 
-	class TextureManager;
 	class ModelFactory {
 	public:
 		static bool load(const std::string& path, TextureManager& textureManager, Model::Pointer& outModel);

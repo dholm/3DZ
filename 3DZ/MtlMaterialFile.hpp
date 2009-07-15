@@ -10,11 +10,11 @@
 #ifndef TDZ_MTLMATERIALFILE_HPP
 #define TDZ_MTLMATERIALFILE_HPP
 
+#include <3DZ/Model.hpp>
+#include <3DZ/Material.hpp>
+#include <3DZ/TextureManager.hpp>
+
 namespace TDZ {
-	
-	class Model;
-	class Material;
-	class TextureManager;
 	
 	class MtlMaterialFile {
 	public:

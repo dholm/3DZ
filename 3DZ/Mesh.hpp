@@ -13,6 +13,8 @@
 #include <vector>
 #include <iosfwd>
 
+#include <3DZ/Vector.hpp>
+
 namespace TDZ {
 
 	template <std::size_t ComponentN, typename ComponentT> class Vector;
