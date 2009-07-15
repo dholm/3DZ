@@ -33,6 +33,8 @@
 		9E86CBAB100E571800CC9EF6 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E86CBA9100E571800CC9EF6 /* Scene.cpp */; };
 		9E86CBB9100E57FF00CC9EF6 /* SceneFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E86CBB7100E57FF00CC9EF6 /* SceneFactory.hpp */; };
 		9E86CBBA100E57FF00CC9EF6 /* SceneFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E86CBB8100E57FF00CC9EF6 /* SceneFactory.cpp */; };
+		9E86CC6F100E696D00CC9EF6 /* Plane.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E86CC6D100E696D00CC9EF6 /* Plane.hpp */; };
+		9E86CC70100E696D00CC9EF6 /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E86CC6E100E696D00CC9EF6 /* Plane.cpp */; };
 		9ED392BF0FE5884B008A9D41 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED392B90FE5884B008A9D41 /* Mesh.cpp */; };
 		9ED392C00FE5884B008A9D41 /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED392BA0FE5884B008A9D41 /* Mesh.hpp */; };
 		9ED393320FE58C88008A9D41 /* FaceIterator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED393300FE58C88008A9D41 /* FaceIterator.hpp */; };
@@ -76,6 +78,8 @@
 		9E86CBA9100E571800CC9EF6 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		9E86CBB7100E57FF00CC9EF6 /* SceneFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SceneFactory.hpp; sourceTree = "<group>"; };
 		9E86CBB8100E57FF00CC9EF6 /* SceneFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneFactory.cpp; sourceTree = "<group>"; };
+		9E86CC6D100E696D00CC9EF6 /* Plane.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Plane.hpp; sourceTree = "<group>"; };
+		9E86CC6E100E696D00CC9EF6 /* Plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plane.cpp; sourceTree = "<group>"; };
 		9ED392B90FE5884B008A9D41 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		9ED392BA0FE5884B008A9D41 /* Mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		9ED393300FE58C88008A9D41 /* FaceIterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FaceIterator.hpp; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 				9ED393310FE58C88008A9D41 /* FaceIterator.cpp */,
 				9E43C7400FE6C49E00F92DCB /* Model.hpp */,
 				9E43C7410FE6C49E00F92DCB /* Model.cpp */,
+				9E86CC6D100E696D00CC9EF6 /* Plane.hpp */,
+				9E86CC6E100E696D00CC9EF6 /* Plane.cpp */,
 			);
 			name = Geometry;
 			sourceTree = "<group>";
@@ -249,6 +255,7 @@
 				9E86CB55100E03A700CC9EF6 /* BspSceneFile.hpp in Headers */,
 				9E86CBAA100E571800CC9EF6 /* Scene.hpp in Headers */,
 				9E86CBB9100E57FF00CC9EF6 /* SceneFactory.hpp in Headers */,
+				9E86CC6F100E696D00CC9EF6 /* Plane.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +318,7 @@
 				9E86CB56100E03A700CC9EF6 /* BspSceneFile.cpp in Sources */,
 				9E86CBAB100E571800CC9EF6 /* Scene.cpp in Sources */,
 				9E86CBBA100E57FF00CC9EF6 /* SceneFactory.cpp in Sources */,
+				9E86CC70100E696D00CC9EF6 /* Plane.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
