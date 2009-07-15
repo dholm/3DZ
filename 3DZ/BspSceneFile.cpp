@@ -66,6 +66,10 @@ namespace TDZ {
 				return false;
 		}
 		
+		if (!loadTextures(bspFile, bspHeader.direntry[DirEntry_Textures])) {
+			return false;
+		}
+		
 		if (!loadPlanes(bspFile, bspHeader.direntry[DirEntry_Planes])) {
 			return false;
 		}
@@ -109,6 +113,21 @@ namespace TDZ {
 		return true;
 	}		
 	
+	bool BspSceneFile::loadTextures(std::istream& bspStream, const BspDirEntry& texturesEntry) {
+		struct BspTexture {
+			char name[64];
+			int32_t flags;
+			int32_t contents;
+		} __attribute__ ((packed));
+		
+		SharedArray<uint8_t>::Type texturesData;
+		if (!loadBspDirEntry(bspStream, texturesEntry, texturesData)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	bool BspSceneFile::loadPlanes(std::istream& bspStream, const BspDirEntry& planesEntry) {
 		struct BspPlane {
 			float normal[3];
@@ -118,6 +137,12 @@ namespace TDZ {
 		SharedArray<uint8_t>::Type planesData;
 		if (!loadBspDirEntry(bspStream, planesEntry, planesData)) {
 			return false;
+		}
+		
+		BspPlane* planes = reinterpret_cast<BspPlane*>(planesData.get());
+		for (std::size_t i = 0; i < planesEntry.length / sizeof(BspPlane); ++i) {
+			Mesh::Vertex normal(planes[i].normal);
+			m_planes.push_back(Plane(normal, planes[i].distance));
 		}
 		
 		return true;
@@ -201,6 +226,12 @@ namespace TDZ {
 		SharedArray<uint8_t>::Type verticesData;
 		if (!loadBspDirEntry(bspStream, verticesEntry, verticesData)) {
 			return false;
+		}
+		
+		BspVertex* vertices = reinterpret_cast<BspVertex*>(verticesData.get());
+		for (std::size_t i = 0; i < verticesEntry.length / sizeof(BspVertex); ++i) {
+			m_vertices.push_back(Mesh::Vertex(vertices[i].position));
+			m_normals.push_back(Mesh::Vertex(vertices[i].normal));
 		}
 		
 		return true;
