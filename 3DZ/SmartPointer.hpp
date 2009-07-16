@@ -30,11 +30,11 @@ namespace TDZ {
 			assert(m_count == 0);
 		}
 
-		int inc() {
+		virtual int inc() {
 			return ++m_count;
 		}
 		
-		int dec() {
+		virtual int dec() {
 			assert(m_count != 0);
 			return --m_count;
 		}
@@ -101,6 +101,39 @@ namespace TDZ {
 		friend class SmartPointer<T, ArrayProxy<T> >;
 	};
 
+	template <typename T>
+	class WeakProxy : public ResourceProxy<T> {
+	private:
+		explicit WeakProxy(T* pointee) :
+			ResourceProxy<T>(),
+			m_pointee(pointee)
+		{
+			assert(pointee != NULL);
+		}
+		
+		explicit WeakProxy(const SmartPointer<T, ResourceProxy<T> > smartPointer) :
+			m_pointee(smartPointer.get())
+		{
+		}
+		
+		virtual ~WeakProxy() { }
+		
+		int inc() { return 1; }
+		int dec() { return 1; }
+		
+		T* get() {
+			return m_pointee;
+		}
+		
+		const T* get() const {
+			return m_pointee;
+		}
+		
+		T* const m_pointee;
+		
+		friend class SmartPointer<T, WeakProxy<T> >;
+	};
+	
 	template <typename T, class ProxyT>
 	class SmartPointer {
 	public:
@@ -203,6 +236,8 @@ namespace TDZ {
 		}
 		
 		ProxyT* m_resourceProxy;
+		
+		friend class WeakProxy<T>;
 	};
 	
 	template <typename T, class ProxyT>
@@ -216,7 +251,7 @@ namespace TDZ {
 	}
 	
 	template <typename T, class ProxyT>
-	bool operator!=(const SmartPointer<T, ProxyT>&lhs, const SmartPointer<T, ProxyT>& rhs)
+	bool operator!=(const SmartPointer<T, ProxyT>& lhs, const SmartPointer<T, ProxyT>& rhs)
 	{
 		return !(lhs == rhs);
 	}
@@ -236,6 +271,15 @@ namespace TDZ {
 	private:
 		SharedArray();
 	};
+	
+	template <typename T>
+	struct WeakPointer {
+		typedef SmartPointer<T, WeakProxy<T> > Type;
+		
+	private:
+		WeakPointer();
+	};
+	
 } // TDZ
 
 #endif /* TDZ_SMARTPOINTER_HPP */
