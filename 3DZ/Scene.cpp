@@ -9,3 +9,19 @@
 
 #include "Scene.hpp"
 
+namespace TDZ {
+	
+	Scene::Scene() :
+		m_root(new SceneNode)
+	{
+	}
+
+	SceneNode::Pointer& Scene::root() {
+		return m_root;
+	}
+	
+	const SceneNode::Pointer& Scene::root() const {
+		return m_root;
+	}
+
+} // TDZ

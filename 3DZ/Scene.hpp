@@ -11,6 +11,7 @@
 #define TDZ_SCENE_HPP
 
 #include <3DZ/SmartPointer.hpp>
+#include <3DZ/SceneNode.hpp>
 
 namespace TDZ {
 	
@@ -18,9 +19,14 @@ namespace TDZ {
 	public:
 		typedef SharedPointer<Scene>::Type Pointer;
 		
+		Scene();
 		virtual ~Scene() { }
 		
+		SceneNode::Pointer& root();
+		const SceneNode::Pointer& root() const;
+		
 	private:
+		SceneNode::Pointer m_root;
 	};
 	
 } // TDZ
