@@ -17,6 +17,9 @@ namespace TDZ {
 	
 	namespace {
 		const std::string BSP_HEADER_MAGIC("IBSP");
+	}
+	
+	namespace Q3Bsp {
 		const uint8_t BSP_QUAKE3_VERSION(0x2e);
 		
 		enum {
@@ -38,7 +41,20 @@ namespace TDZ {
 			DirEntry_Lightvols,		/**< Local illumination data */
 			DirEntry_Visdata,		/**< Cluster-cluster visibility data */
 		};
-	}
+
+		enum {
+			FaceType_Polygon = 1,
+			FaceType_Patch,
+			FaceType_Mesh,
+			FaceType_Billboard,
+		};
+
+		struct Texture {
+			char name[64];
+			int32_t flags;
+			int32_t contents;
+		} __attribute__ ((packed));
+	} // Q3Bsp
 	
 	bool BspSceneFile::load(const std::string& path) {
 		std::ifstream bspFile(path.c_str());
@@ -49,7 +65,7 @@ namespace TDZ {
 		struct {
 			char magic[4];
 			int32_t version;
-			BspDirEntry direntry[17];
+			Q3Bsp::DirEntry direntry[17];
 		} __attribute__ ((packed)) bspHeader;
 		
 		if (!bspFile.read(reinterpret_cast<char*>(&bspHeader), sizeof(bspHeader))) {
@@ -59,49 +75,49 @@ namespace TDZ {
 			return false;
 		}
 		switch (bspHeader.version) {
-			case BSP_QUAKE3_VERSION:
+			case Q3Bsp::BSP_QUAKE3_VERSION:
 				break;
 				
 			default:
 				return false;
 		}
 		
-		if (!loadTextures(bspFile, bspHeader.direntry[DirEntry_Textures])) {
+		if (!loadTextures(bspFile, bspHeader.direntry[Q3Bsp::DirEntry_Textures])) {
 			return false;
 		}
 		
-		if (!loadPlanes(bspFile, bspHeader.direntry[DirEntry_Planes])) {
+		if (!loadPlanes(bspFile, bspHeader.direntry[Q3Bsp::DirEntry_Planes])) {
 			return false;
 		}
 		
-		if (!loadNodes(bspFile, bspHeader.direntry[DirEntry_Planes])) {
+		if (!loadNodes(bspFile, bspHeader.direntry[Q3Bsp::DirEntry_Nodes])) {
 			return false;
 		}
 		
-		if (!loadLeaves(bspFile, bspHeader.direntry[DirEntry_Leaves])) {
+		if (!loadLeaves(bspFile, bspHeader.direntry[Q3Bsp::DirEntry_Leaves])) {
 			return false;
 		}
 		
-		if (!loadLeafFaces(bspFile, bspHeader.direntry[DirEntry_Leaves])) {
+		if (!loadLeafFaces(bspFile, bspHeader.direntry[Q3Bsp::DirEntry_Leaves])) {
 			return false;
 		}
 		
-		if (!loadModels(bspFile, bspHeader.direntry[DirEntry_Models])) {
+		if (!loadModels(bspFile, bspHeader.direntry[Q3Bsp::DirEntry_Models])) {
 			return false;
 		}
 		
-		if (!loadVertices(bspFile, bspHeader.direntry[DirEntry_Vertices])) {
+		if (!loadVertices(bspFile, bspHeader.direntry[Q3Bsp::DirEntry_Vertices])) {
 			return false;
 		}
 		
-		if (!loadFaces(bspFile, bspHeader.direntry[DirEntry_Faces])) {
+		if (!loadFaces(bspFile, bspHeader.direntry[Q3Bsp::DirEntry_Faces])) {
 			return false;
 		}
 		
 		return true;
 	}
 	
-	bool BspSceneFile::loadBspDirEntry(std::istream& bspStream, const BspDirEntry& entry, SharedArray<uint8_t>::Type& outData) {
+	bool BspSceneFile::loadBspDirEntry(std::istream& bspStream, const Q3Bsp::DirEntry& entry, SharedArray<uint8_t>::Type& outData) {
 		if (!bspStream.seekg(entry.offset, std::ios::beg)) {
 			return false;
 		}
@@ -113,13 +129,7 @@ namespace TDZ {
 		return true;
 	}		
 	
-	bool BspSceneFile::loadTextures(std::istream& bspStream, const BspDirEntry& texturesEntry) {
-		struct BspTexture {
-			char name[64];
-			int32_t flags;
-			int32_t contents;
-		} __attribute__ ((packed));
-		
+	bool BspSceneFile::loadTextures(std::istream& bspStream, const Q3Bsp::DirEntry& texturesEntry) {
 		SharedArray<uint8_t>::Type texturesData;
 		if (!loadBspDirEntry(bspStream, texturesEntry, texturesData)) {
 			return false;
@@ -128,76 +138,63 @@ namespace TDZ {
 		return true;
 	}
 	
-	bool BspSceneFile::loadPlanes(std::istream& bspStream, const BspDirEntry& planesEntry) {
-		struct BspPlane {
-			float normal[3];
-			float distance;
-		} __attribute__ ((packed));
-		
-		SharedArray<uint8_t>::Type planesData;
-		if (!loadBspDirEntry(bspStream, planesEntry, planesData)) {
+	bool BspSceneFile::loadPlanes(std::istream& bspStream, const Q3Bsp::DirEntry& planesEntry) {
+		if (!bspStream.seekg(planesEntry.offset, std::ios::beg)) {
 			return false;
 		}
 		
-		BspPlane* planes = reinterpret_cast<BspPlane*>(planesData.get());
-		for (std::size_t i = 0; i < planesEntry.length / sizeof(BspPlane); ++i) {
-			Mesh::Vertex normal(planes[i].normal);
-			m_planes.push_back(Plane(normal, planes[i].distance));
-		}
+		std::size_t numPlanes(planesEntry.length / sizeof(Q3Bsp::Plane));
+		m_planes.reserve(numPlanes);
 		
+		if (!bspStream.read(reinterpret_cast<char*>(&m_planes[0]), planesEntry.length)) {
+			return false;
+		}
 		return true;
 	}
 	
-	bool BspSceneFile::loadNodes(std::istream& bspStream, const BspDirEntry& nodesEntry) {
-		struct BspNode {
-			int32_t plane;
-			int32_t children[2];
-			int32_t minCoord[3];
-			int32_t maxCoord[3];
-		} __attribute__ ((packed));
-		
-		SharedArray<uint8_t>::Type nodesData;
-		if (!loadBspDirEntry(bspStream, nodesEntry, nodesData)) {
+	bool BspSceneFile::loadNodes(std::istream& bspStream, const Q3Bsp::DirEntry& nodesEntry) {
+		if (!bspStream.seekg(nodesEntry.offset, std::ios::beg)) {
 			return false;
 		}
 		
+		std::size_t numNodes(nodesEntry.length / sizeof(Q3Bsp::Node));
+		m_nodes.reserve(numNodes);
+		
+		if (!bspStream.read(reinterpret_cast<char*>(&m_nodes[0]), nodesEntry.length)) {
+			return false;
+		}
 		return true;
 	}
 	
-	bool BspSceneFile::loadLeaves(std::istream& bspStream, const BspDirEntry& LeavesEntry) {
-		struct BspLeaf {
-			int32_t cluster;
-			int32_t area;
-			int32_t minCoord[3];
-			int32_t maxCoord[3];
-			int32_t face;
-			int32_t numFaces;
-			int32_t brush;
-			int32_t numBrushes;
-		} __attribute__ ((packed));
-		
-		SharedArray<uint8_t>::Type LeavesData;
-		if (!loadBspDirEntry(bspStream, LeavesEntry, LeavesData)) {
+	bool BspSceneFile::loadLeaves(std::istream& bspStream, const Q3Bsp::DirEntry& leavesEntry) {
+		if (!bspStream.seekg(leavesEntry.offset, std::ios::beg)) {
 			return false;
 		}
-
+		
+		std::size_t numLeaves(leavesEntry.length / sizeof(Q3Bsp::Leaf));
+		m_leaves.reserve(numLeaves);
+		
+		if (!bspStream.read(reinterpret_cast<char*>(&m_leaves[0]), leavesEntry.length)) {
+			return false;
+		}
 		return true;
 	}
 	
-	bool BspSceneFile::loadLeafFaces(std::istream& bspStream, const BspDirEntry& leafFacesEntry) {
-		struct BspLeafFace {
-			int32_t face;
-		} __attribute__ ((packed));
-
-		SharedArray<uint8_t>::Type leafFacesData;
-		if (!loadBspDirEntry(bspStream, leafFacesEntry, leafFacesData)) {
+	bool BspSceneFile::loadLeafFaces(std::istream& bspStream, const Q3Bsp::DirEntry& leafFacesEntry) {
+		if (!bspStream.seekg(leafFacesEntry.offset, std::ios::beg)) {
 			return false;
 		}
 		
+		std::size_t numLeafFaces(leafFacesEntry.length / sizeof(Q3Bsp::LeafFace));
+		m_leafFaces.reserve(numLeafFaces);
+
+		if (!bspStream.read(reinterpret_cast<char*>(&m_leafFaces[0]), leafFacesEntry.length)) {
+			return false;
+		}
 		return true;
 	}
 
-	bool BspSceneFile::loadModels(std::istream& bspStream, const BspDirEntry& modelsEntry) {
+	bool BspSceneFile::loadModels(std::istream& bspStream, const Q3Bsp::DirEntry& modelsEntry) {
 		struct BspModel {
 			float minCoord[3];
 			float maxCoord[3];
@@ -215,58 +212,31 @@ namespace TDZ {
 		return true;
 	}
 	
-	bool BspSceneFile::loadVertices(std::istream& bspStream, const BspDirEntry& verticesEntry) {
-		struct BspVertex {
-			float position[3];
-			float textureCoord[2][2];
-			float normal[3];
-			uint8_t color[4];
-		} __attribute__ ((packed));
-		
-		SharedArray<uint8_t>::Type verticesData;
-		if (!loadBspDirEntry(bspStream, verticesEntry, verticesData)) {
+	bool BspSceneFile::loadVertices(std::istream& bspStream, const Q3Bsp::DirEntry& verticesEntry) {
+		if (!bspStream.seekg(verticesEntry.offset, std::ios::beg)) {
 			return false;
 		}
 		
-		BspVertex* vertices = reinterpret_cast<BspVertex*>(verticesData.get());
-		for (std::size_t i = 0; i < verticesEntry.length / sizeof(BspVertex); ++i) {
-			m_vertices.push_back(Mesh::Vertex(vertices[i].position));
-			m_normals.push_back(Mesh::Vertex(vertices[i].normal));
-		}
+		std::size_t numVertices(verticesEntry.length / sizeof(Q3Bsp::Vertex));
+		m_vertices.reserve(numVertices);
 		
+		if (!bspStream.read(reinterpret_cast<char*>(&m_vertices[0]), verticesEntry.length)) {
+			return false;
+		}
 		return true;
 	}
 	
-	bool BspSceneFile::loadFaces(std::istream& bspStream, const BspDirEntry& facesEntry) {
-		enum {
-			BspFaceType_Polygon = 1,
-			BspFaceType_Patch,
-			BspFaceType_Mesh,
-			BspFaceType_Billboard,
-		};
-		
-		struct BspFace {
-			int32_t texture;
-			int32_t effect;
-			int32_t type;
-			int32_t vertex;
-			int32_t numVertices;
-			int32_t meshVertex;
-			int32_t numMeshVertices;
-			int32_t lightmap;
-			int32_t lightmapStart[2];
-			int32_t lightmapSize[2];
-			float lightmapOrigin[3];
-			float lightmapVectors[2][3];
-			float normal[3];
-			int32_t size[2];
-		} __attribute__ ((packed));
-		
-		SharedArray<uint8_t>::Type facesData;
-		if (!loadBspDirEntry(bspStream, facesEntry, facesData)) {
+	bool BspSceneFile::loadFaces(std::istream& bspStream, const Q3Bsp::DirEntry& facesEntry) {
+		if (!bspStream.seekg(facesEntry.offset, std::ios::beg)) {
 			return false;
 		}
 		
+		std::size_t numFaces(facesEntry.length / sizeof(Q3Bsp::Face));
+		m_faces.reserve(numFaces);
+
+		if (!bspStream.read(reinterpret_cast<char*>(&m_faces[0]), facesEntry.length)) {
+			return false;
+		}
 		return true;
 	}
 	
