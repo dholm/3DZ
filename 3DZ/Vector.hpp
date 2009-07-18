@@ -45,6 +45,25 @@ namespace TDZ {
 			return m_vector.a[i];
 		}
 		
+		ComponentT length() const {
+			ComponentT scalar = 0;
+			for (std::size_t i = 0; i < N; ++i) {
+				scalar += (m_vector.a[i] * m_vector.a[i]);
+			}
+			return sqrt(scalar);
+		}
+		
+		Vector<N, ComponentT> normalize() const {
+			Vector<N, ComponentT> result(*this);
+			ComponentT len(length());
+			if (ComponentT(0) < len) {
+				for (std::size_t i = 0; i < N; ++i) {
+					result[i] /= len;
+				}
+			}
+			return result;
+		}
+		
 		ComponentT dot(const Vector<N, ComponentT>& vector) const {
 			ComponentT scalar = 0;
 			for (std::size_t i = 0; i < N; ++i) {
