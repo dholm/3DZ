@@ -131,6 +131,10 @@ namespace TDZ {
 			return result;
 		}
 		
+		operator Vector<3, ComponentT>() const {
+			return Vector<3, ComponentT>(&m_quaternion.a[1]);
+		}
+		
 		friend std::ostream& operator<<(std::ostream& outStream, const Quaternion<ComponentT>& quaternion) {
 			outStream << "[";
 			for (std::size_t i = 0; i < 4; ++i) {
