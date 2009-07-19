@@ -112,7 +112,7 @@ namespace TDZ {
 			return matrix;
 		}
 		
-		Quaternion<ComponentT>& normalize() {
+		Quaternion<ComponentT>& normalize() const {
 			float magnitude = m_quaternion.a[0] * m_quaternion.a[0] + m_quaternion.a[1] * m_quaternion.a[1] + m_quaternion.a[2] * m_quaternion.a[2] + m_quaternion.a[3] * m_quaternion.a[3];
 			m_quaternion.a[0] = m_quaternion.a[0] / magnitude;
 			m_quaternion.a[1] = m_quaternion.a[1] / magnitude;
