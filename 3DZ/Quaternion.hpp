@@ -154,6 +154,18 @@ namespace TDZ {
 	};
 
 	template <typename ComponentT>
+	struct IdentityQuaternion {
+		static Quaternion<ComponentT> create() {
+			return Quaternion<ComponentT>(
+				ComponentT(1),
+				ComponentT(0),
+				ComponentT(0),
+				ComponentT(0)
+			);
+		}
+	};
+	
+	template <typename ComponentT>
 	struct RotationQuaternion {
 		static Quaternion<ComponentT> create(const ComponentT& radian, const Vector<3, ComponentT>& vector) {
 			const ComponentT halfRadian(radian / ComponentT(2));
