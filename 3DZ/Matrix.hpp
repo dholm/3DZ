@@ -42,11 +42,11 @@ namespace TDZ {
 		}
 		
 		inline const ComponentT& operator()(std::size_t row, std::size_t column) const {
-			return m_matrix[(column * N) + row];
+			return m_matrix[(row * M) + column];
 		}
 
 		inline ComponentT& operator()(std::size_t row, std::size_t column) {
-			return m_matrix[(column * N) + row];
+			return m_matrix[(row * M) + column];
 		}
 
 		inline Vector<M, ComponentT> operator*(const Vector<M, ComponentT>& vec) const {
