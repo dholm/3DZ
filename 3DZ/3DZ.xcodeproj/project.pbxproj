@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E28B9351011452000D913F5 /* Camera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E28B9331011452000D913F5 /* Camera.hpp */; };
+		9E28B93A1011474200D913F5 /* OpenGlCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E28B9381011474200D913F5 /* OpenGlCamera.hpp */; };
+		9E28B93B1011474200D913F5 /* OpenGlCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E28B9391011474200D913F5 /* OpenGlCamera.cpp */; };
 		9E43C7420FE6C49E00F92DCB /* Model.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E43C7400FE6C49E00F92DCB /* Model.hpp */; };
 		9E43C7430FE6C49E00F92DCB /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E43C7410FE6C49E00F92DCB /* Model.cpp */; };
 		9E43C7480FE6C54E00F92DCB /* ModelFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E43C7440FE6C54E00F92DCB /* ModelFactory.cpp */; };
@@ -37,6 +40,7 @@
 		9E86CC70100E696D00CC9EF6 /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E86CC6E100E696D00CC9EF6 /* Plane.cpp */; };
 		9E86CC98100F2B2F00CC9EF6 /* SceneNode.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E86CC96100F2B2F00CC9EF6 /* SceneNode.hpp */; };
 		9E86CC99100F2B2F00CC9EF6 /* SceneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E86CC97100F2B2F00CC9EF6 /* SceneNode.cpp */; };
+		9EB457C91012A141002A7FCE /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EB457C81012A141002A7FCE /* Camera.cpp */; };
 		9ED392BF0FE5884B008A9D41 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED392B90FE5884B008A9D41 /* Mesh.cpp */; };
 		9ED392C00FE5884B008A9D41 /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED392BA0FE5884B008A9D41 /* Mesh.hpp */; };
 		9ED393320FE58C88008A9D41 /* FaceIterator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED393300FE58C88008A9D41 /* FaceIterator.hpp */; };
@@ -54,6 +58,9 @@
 		32BAE0B70371A74B00C91783 /* 3DZ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DZ_Prefix.pch; sourceTree = "<group>"; };
 		5073E0C609E734A800EC74B6 /* 3DZProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = 3DZProj.xcconfig; sourceTree = "<group>"; };
 		5073E0C709E734A800EC74B6 /* 3DZTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = 3DZTarget.xcconfig; sourceTree = "<group>"; };
+		9E28B9331011452000D913F5 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		9E28B9381011474200D913F5 /* OpenGlCamera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGlCamera.hpp; sourceTree = "<group>"; };
+		9E28B9391011474200D913F5 /* OpenGlCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGlCamera.cpp; sourceTree = "<group>"; };
 		9E43C7400FE6C49E00F92DCB /* Model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Model.hpp; sourceTree = "<group>"; };
 		9E43C7410FE6C49E00F92DCB /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
 		9E43C7440FE6C54E00F92DCB /* ModelFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelFactory.cpp; sourceTree = "<group>"; };
@@ -84,6 +91,7 @@
 		9E86CC6E100E696D00CC9EF6 /* Plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plane.cpp; sourceTree = "<group>"; };
 		9E86CC96100F2B2F00CC9EF6 /* SceneNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SceneNode.hpp; sourceTree = "<group>"; };
 		9E86CC97100F2B2F00CC9EF6 /* SceneNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneNode.cpp; sourceTree = "<group>"; };
+		9EB457C81012A141002A7FCE /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		9ED392B90FE5884B008A9D41 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		9ED392BA0FE5884B008A9D41 /* Mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		9ED393300FE58C88008A9D41 /* FaceIterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FaceIterator.hpp; sourceTree = "<group>"; };
@@ -138,6 +146,7 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9E86CF101010882B00CC9EF6 /* Rendering */,
 				9E86CBA7100E56FE00CC9EF6 /* SceneGraph */,
 				9E86CB4B100E035200CC9EF6 /* Graphics */,
 				9E86CB47100E031C00CC9EF6 /* Geometry */,
@@ -233,6 +242,17 @@
 			name = SceneGraph;
 			sourceTree = "<group>";
 		};
+		9E86CF101010882B00CC9EF6 /* Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				9E28B9381011474200D913F5 /* OpenGlCamera.hpp */,
+				9E28B9391011474200D913F5 /* OpenGlCamera.cpp */,
+				9E28B9331011452000D913F5 /* Camera.hpp */,
+				9EB457C81012A141002A7FCE /* Camera.cpp */,
+			);
+			name = Rendering;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -263,6 +283,8 @@
 				9E86CBB9100E57FF00CC9EF6 /* SceneFactory.hpp in Headers */,
 				9E86CC6F100E696D00CC9EF6 /* Plane.hpp in Headers */,
 				9E86CC98100F2B2F00CC9EF6 /* SceneNode.hpp in Headers */,
+				9E28B9351011452000D913F5 /* Camera.hpp in Headers */,
+				9E28B93A1011474200D913F5 /* OpenGlCamera.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +349,8 @@
 				9E86CBBA100E57FF00CC9EF6 /* SceneFactory.cpp in Sources */,
 				9E86CC70100E696D00CC9EF6 /* Plane.cpp in Sources */,
 				9E86CC99100F2B2F00CC9EF6 /* SceneNode.cpp in Sources */,
+				9E28B93B1011474200D913F5 /* OpenGlCamera.cpp in Sources */,
+				9EB457C91012A141002A7FCE /* Camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
