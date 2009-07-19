@@ -12,6 +12,8 @@
 
 #include <iosfwd>
 
+#include <3DZ/Vector.hpp>
+
 namespace TDZ {
 	
 	template <std::size_t M, std::size_t N, typename ComponentT>
@@ -38,6 +40,10 @@ namespace TDZ {
 		}
 		
 		inline operator const ComponentT*() const {
+			return &(*this)(0, 0);
+		}
+		
+		inline operator ComponentT*() {
 			return &(*this)(0, 0);
 		}
 		
