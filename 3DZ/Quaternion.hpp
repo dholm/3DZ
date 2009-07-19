@@ -10,6 +10,8 @@
 #ifndef TDZ_QUATERNION_HPP
 #define TDZ_QUATERNION_HPP
 
+#include <3DZ/Radian.hpp>
+
 namespace TDZ {
 
 	template <std::size_t N, typename ComponentT> class Vector;
@@ -167,7 +169,7 @@ namespace TDZ {
 	
 	template <typename ComponentT>
 	struct RotationQuaternion {
-		static Quaternion<ComponentT> create(const ComponentT& radian, const Vector<3, ComponentT>& vector) {
+		static Quaternion<ComponentT> create(const Radian<ComponentT>& radian, const Vector<3, ComponentT>& vector) {
 			const ComponentT halfRadian(radian / ComponentT(2));
 			const ComponentT sinRadian(sin(halfRadian));
 			
