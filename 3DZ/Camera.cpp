@@ -33,8 +33,8 @@ namespace TDZ {
 	
 	void Camera::target(const Vector<3, float>& target) {
 		m_zAxis = (m_eye - target).normalized();
-		m_yAxis = m_zAxis.cross(m_xAxis).normalized();
-		m_xAxis = m_xAxis.normalized();
+		m_xAxis = cross(m_yAxis, m_zAxis).normalized();
+		m_yAxis = cross(m_zAxis, m_xAxis).normalized();
 		
 		m_view(0, 0) = m_xAxis[0];
 		m_view(1, 0) = m_xAxis[1];

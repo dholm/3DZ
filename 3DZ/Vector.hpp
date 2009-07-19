@@ -81,14 +81,6 @@ namespace TDZ {
 			return scalar;
 		}
 		
-		Vector<N, ComponentT> cross(const Vector<N, ComponentT>& vector) const {
-			Vector<N, ComponentT> result;
-			for (std::size_t i = 0; i < N; ++i) {
-				result[i] = m_vector.a[i] * vector[i];
-			}
-			return result;
-		}
-		
 		friend std::ostream& operator<<(std::ostream& outStream, const Vector<N, ComponentT>& vector) {
 			outStream << "[";
 			for (std::size_t i = 0; i < N; ++i) {
@@ -132,6 +124,15 @@ namespace TDZ {
 		}
 	};
 	
+	template <typename ComponentT>
+	Vector<3, ComponentT> cross(const Vector<3, ComponentT>& lhs, const Vector<3, ComponentT>& rhs) {
+		return Vector3<ComponentT>(
+			lhs[1] * rhs[2] - lhs[2] * rhs[1],
+			lhs[2] * rhs[0] - lhs[0] * rhs[2],
+			lhs[0] * rhs[1] - lhs[1] * rhs[0]
+		);
+	}
+		
 } // TDZ
 
 #endif /* TDZ_VECTOR_HPP */
