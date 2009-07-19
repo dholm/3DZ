@@ -112,7 +112,7 @@ namespace TDZ {
 			return matrix;
 		}
 		
-		Quaternion<ComponentT>& normalize() const {
+		Quaternion<ComponentT>& normalized() const {
 			float magnitude = m_quaternion.a[0] * m_quaternion.a[0] + m_quaternion.a[1] * m_quaternion.a[1] + m_quaternion.a[2] * m_quaternion.a[2] + m_quaternion.a[3] * m_quaternion.a[3];
 			m_quaternion.a[0] = m_quaternion.a[0] / magnitude;
 			m_quaternion.a[1] = m_quaternion.a[1] / magnitude;
@@ -121,7 +121,7 @@ namespace TDZ {
 			return *this;
 		}
 		
-		Quaternion<ComponentT> conjugate() const {
+		Quaternion<ComponentT> conjugated() const {
 			Quaternion<ComponentT> result(
 				m_quaternion.a[0],
 				-m_quaternion.a[1],

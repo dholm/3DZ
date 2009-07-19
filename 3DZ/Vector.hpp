@@ -54,7 +54,7 @@ namespace TDZ {
 			return sqrt(scalar);
 		}
 		
-		Vector<N, ComponentT> normalize() const {
+		Vector<N, ComponentT> normalized() const {
 			Vector<N, ComponentT> result(*this);
 			ComponentT len(length());
 			if (ComponentT(0) < len) {
