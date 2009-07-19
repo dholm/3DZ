@@ -11,6 +11,7 @@
 #define TDZ_VECTOR_HPP
 
 #include <iostream>
+#include <cmath>
 #include <cassert>
 
 namespace TDZ {
@@ -100,12 +101,37 @@ namespace TDZ {
 			return outStream;
 		}
 		
-	private:
+	protected:
 		union {
 			ComponentT a[N] __attribute__ ((packed));
 		} m_vector __attribute__ ((aligned (16)));
 	};
+	
+	template <typename ComponentT>
+	class Vector3 : public Vector<3, ComponentT> {
+	public:
+		explicit Vector3(const ComponentT& x, const ComponentT& y, const ComponentT& z) :
+			Vector<3, ComponentT>()
+		{
+			(*this)[0] = x;
+			(*this)[1] = y;
+			(*this)[2] = z;
+		}
+	};
 		
+	template <typename ComponentT>
+	class Vector4 : public Vector<4, ComponentT> {
+	public:
+		explicit Vector4(const ComponentT& x, const ComponentT& y, const ComponentT& z, const ComponentT& w) :
+		Vector<4, ComponentT>()
+		{
+			(*this)[0] = x;
+			(*this)[1] = y;
+			(*this)[2] = z;
+			(*this)[3] = w;
+		}
+	};
+	
 } // TDZ
 
 #endif /* TDZ_VECTOR_HPP */
