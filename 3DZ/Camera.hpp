@@ -24,7 +24,7 @@ namespace TDZ {
 		Camera();
 		virtual ~Camera() { }
 		
-		virtual void move(const Vector<3, float>& position);
+		virtual void position(const Vector<3, float>& pos);
 		virtual void orientation(const Quaternion<float>& o);
 		virtual void target(const Vector<3, float>& target);
 		virtual void render() const = 0;

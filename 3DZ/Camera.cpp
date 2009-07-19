@@ -21,8 +21,8 @@ namespace TDZ {
 	{
 	}
 	
-	void Camera::move(const Vector<3, float>& position) {
-		m_eye = position;
+	void Camera::position(const Vector<3, float>& pos) {
+		m_eye = pos;
 		updateViewMatrix();
 	}
 	
@@ -51,7 +51,7 @@ namespace TDZ {
 		m_view(2, 2) = m_zAxis[2];
 		m_view(3, 2) = -m_zAxis.dot(m_eye);
 		
-		m_orientation = Quaternion<float>(m_view);
+		m_orientation = m_view;
 	}
 	
 	const Matrix<4, 4, float>& Camera::view() const {
