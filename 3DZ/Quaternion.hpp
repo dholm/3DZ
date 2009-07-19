@@ -86,22 +86,22 @@ namespace TDZ {
 			return result;
 		}
 		
-		Matrix<4, 4, ComponentT> toMatrix() const {
+		operator Matrix<4, 4, ComponentT>() const {
 			Matrix<4, 4, ComponentT> matrix;
 			
-			matrix(0, 0) = ComponentT(1) - ComponentT(2) * m_quaternion.a[2] * m_quaternion.a[2] - ComponentT(2) * m_quaternion.a[3] * m_quaternion.a[3];
-			matrix(0, 1) = ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[2] + ComponentT(2) * m_quaternion.a[3] * m_quaternion.a[0];
-			matrix(0, 2) = ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[3] - ComponentT(2) * m_quaternion.a[2] * m_quaternion.a[0];
+			matrix(0, 0) = ComponentT(1) - ComponentT(2) * (m_quaternion.a[2] * m_quaternion.a[2] + m_quaternion.a[3] * m_quaternion.a[3]);
+			matrix(0, 1) = ComponentT(2) * (m_quaternion.a[1] * m_quaternion.a[2] + m_quaternion.a[0] * m_quaternion.a[3]);
+			matrix(0, 2) = ComponentT(2) * (m_quaternion.a[1] * m_quaternion.a[3] - m_quaternion.a[0] * m_quaternion.a[2]);
 			matrix(0, 3) = ComponentT(0);
 			
-			matrix(1, 0) = ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[2] - ComponentT(2) * m_quaternion.a[3] * m_quaternion.a[0];
-			matrix(1, 1) = ComponentT(1) - ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[1] - ComponentT(2) * m_quaternion.a[3] * m_quaternion.a[3];
-			matrix(1, 2) = ComponentT(2) * m_quaternion.a[3] * m_quaternion.a[2] + ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[0];
+			matrix(1, 0) = ComponentT(2) * (m_quaternion.a[1] * m_quaternion.a[2] - m_quaternion.a[0] * m_quaternion.a[3]);
+			matrix(1, 1) = ComponentT(1) - ComponentT(2) * (m_quaternion.a[1] * m_quaternion.a[1] + m_quaternion.a[3] * m_quaternion.a[3]);
+			matrix(1, 2) = ComponentT(2) * (m_quaternion.a[2] * m_quaternion.a[3] + m_quaternion.a[0] * m_quaternion.a[1]);
 			matrix(1, 3) = ComponentT(0);
 			
-			matrix(2, 0) = ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[3] + ComponentT(2) * m_quaternion.a[2] * m_quaternion.a[0];
-			matrix(2, 1) = ComponentT(2) * m_quaternion.a[3] * m_quaternion.a[2] - ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[0];
-			matrix(2, 2) = ComponentT(1) - ComponentT(2) * m_quaternion.a[1] * m_quaternion.a[1] - ComponentT(2) * m_quaternion.a[2] * m_quaternion.a[2];
+			matrix(2, 0) = ComponentT(2) * (m_quaternion.a[1] * m_quaternion.a[3] + m_quaternion.a[0] * m_quaternion.a[2]);
+			matrix(2, 1) = ComponentT(2) * (m_quaternion.a[2] * m_quaternion.a[3] - m_quaternion.a[0] * m_quaternion.a[1]);
+			matrix(2, 2) = ComponentT(1) - ComponentT(2) * (m_quaternion.a[1] * m_quaternion.a[1] + m_quaternion.a[2] * m_quaternion.a[2]);
 			matrix(2, 3) = ComponentT(0);
 			
 			matrix(3, 0) = ComponentT(0);
