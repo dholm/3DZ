@@ -121,12 +121,12 @@ namespace TDZ {
 			return *this;
 		}
 		
-		friend Quaternion<ComponentT> conjugate(const Quaternion<ComponentT>& quaternion) {
+		Quaternion<ComponentT> conjugate() const {
 			Quaternion<ComponentT> result(
-				quaternion[0],
-				-quaternion[1],
-				-quaternion[2],
-				-quaternion[3]
+				m_quaternion.a[0],
+				-m_quaternion.a[1],
+				-m_quaternion.a[2],
+				-m_quaternion.a[3]
 			);
 			return result;
 		}
