@@ -72,6 +72,16 @@ namespace TDZ {
 			return result;
 		}
 
+		inline Matrix<N, M, ComponentT> transpose() const {
+			Matrix<N, M, ComponentT> result;
+			for (std::size_t i = 0; i < M; ++i) {
+				for (std::size_t j = 0; j < N; ++j) {
+					result(j, i) = (*this)(i, j);
+				}
+			}
+			return result;
+		}
+		
 		friend std::ostream& operator<<(std::ostream& outStream, const Matrix<M, N, ComponentT>& matrix) {
 			for (std::size_t row = 0; row < M; ++row) {
 				outStream << "[";
