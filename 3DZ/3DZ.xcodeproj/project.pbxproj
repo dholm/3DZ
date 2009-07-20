@@ -37,7 +37,6 @@
 		9E86CBB9100E57FF00CC9EF6 /* SceneFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E86CBB7100E57FF00CC9EF6 /* SceneFactory.hpp */; };
 		9E86CBBA100E57FF00CC9EF6 /* SceneFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E86CBB8100E57FF00CC9EF6 /* SceneFactory.cpp */; };
 		9E86CC6F100E696D00CC9EF6 /* Plane.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E86CC6D100E696D00CC9EF6 /* Plane.hpp */; };
-		9E86CC70100E696D00CC9EF6 /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E86CC6E100E696D00CC9EF6 /* Plane.cpp */; };
 		9E86CC98100F2B2F00CC9EF6 /* SceneNode.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9E86CC96100F2B2F00CC9EF6 /* SceneNode.hpp */; };
 		9E86CC99100F2B2F00CC9EF6 /* SceneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E86CC97100F2B2F00CC9EF6 /* SceneNode.cpp */; };
 		9EB457C91012A141002A7FCE /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EB457C81012A141002A7FCE /* Camera.cpp */; };
@@ -90,7 +89,6 @@
 		9E86CBB7100E57FF00CC9EF6 /* SceneFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SceneFactory.hpp; sourceTree = "<group>"; };
 		9E86CBB8100E57FF00CC9EF6 /* SceneFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneFactory.cpp; sourceTree = "<group>"; };
 		9E86CC6D100E696D00CC9EF6 /* Plane.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Plane.hpp; sourceTree = "<group>"; };
-		9E86CC6E100E696D00CC9EF6 /* Plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plane.cpp; sourceTree = "<group>"; };
 		9E86CC96100F2B2F00CC9EF6 /* SceneNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SceneNode.hpp; sourceTree = "<group>"; };
 		9E86CC97100F2B2F00CC9EF6 /* SceneNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneNode.cpp; sourceTree = "<group>"; };
 		9EB457C81012A141002A7FCE /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 				9E43C7400FE6C49E00F92DCB /* Model.hpp */,
 				9E43C7410FE6C49E00F92DCB /* Model.cpp */,
 				9E86CC6D100E696D00CC9EF6 /* Plane.hpp */,
-				9E86CC6E100E696D00CC9EF6 /* Plane.cpp */,
 			);
 			name = Geometry;
 			sourceTree = "<group>";
@@ -355,7 +352,6 @@
 				9E86CB56100E03A700CC9EF6 /* BspSceneFile.cpp in Sources */,
 				9E86CBAB100E571800CC9EF6 /* Scene.cpp in Sources */,
 				9E86CBBA100E57FF00CC9EF6 /* SceneFactory.cpp in Sources */,
-				9E86CC70100E696D00CC9EF6 /* Plane.cpp in Sources */,
 				9E86CC99100F2B2F00CC9EF6 /* SceneNode.cpp in Sources */,
 				9E28B93B1011474200D913F5 /* OpenGlCamera.cpp in Sources */,
 				9EB457C91012A141002A7FCE /* Camera.cpp in Sources */,
