@@ -14,6 +14,7 @@
 #include <3DZ/Vector.hpp>
 #include <3DZ/Matrix.hpp>
 #include <3DZ/Quaternion.hpp>
+#include <3DZ/Frustum.hpp>
 
 namespace TDZ {
 	
@@ -24,12 +25,14 @@ namespace TDZ {
 		Camera();
 		virtual ~Camera() { }
 		
-		virtual void position(const Vector<3, float>& pos);
-		virtual void orientation(const Quaternion<float>& o);
-		virtual void target(const Vector<3, float>& target);
+		virtual void setProjection(const Frustum<float>& projection);
+		virtual void setPosition(const Vector<3, float>& pos);
+		virtual void setOrientation(const Quaternion<float>& o);
+		virtual void setTarget(const Vector<3, float>& target);
 		virtual void render() const = 0;
 		
 	protected:
+		const Matrix<4, 4, float>& projection() const;
 		const Matrix<4, 4, float>& view() const;
 		
 	private:
@@ -41,7 +44,8 @@ namespace TDZ {
 		Vector<3, float> m_zAxis;
 		Quaternion<float> m_orientation;
 		
-		Matrix<4, 4, float> m_view;		
+		Matrix<4, 4, float> m_projection;
+		Matrix<4, 4, float> m_view;
 	};
 	
 } // TDZ

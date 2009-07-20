@@ -14,6 +14,9 @@
 namespace TDZ {
 	
 	void OpenGlCamera::render() const {
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(projection());
+		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadMatrixf(view());
 	}

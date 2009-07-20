@@ -17,21 +17,26 @@ namespace TDZ {
 		m_yAxis(Vector3<float>(0.0, 1.0, 0.0)),
 		m_zAxis(Vector3<float>(0.0, 0.0, 1.0)),
 		m_orientation(IdentityQuaternion<float>::create()),
+		m_projection(IdentityMatrix<4, float>::create()),
 		m_view(IdentityMatrix<4, float>::create())
 	{
 	}
 	
-	void Camera::position(const Vector<3, float>& pos) {
+	void Camera::setProjection(const Frustum<float>& projection) {
+		m_projection = projection;
+	}
+
+	void Camera::setPosition(const Vector<3, float>& pos) {
 		m_eye = pos;
 		updateViewMatrix();
 	}
 	
-	void Camera::orientation(const Quaternion<float>& o) {
+	void Camera::setOrientation(const Quaternion<float>& o) {
 		m_orientation = o;
 		updateViewMatrix();
 	}
 	
-	void Camera::target(const Vector<3, float>& target) {
+	void Camera::setTarget(const Vector<3, float>& target) {
 		m_zAxis = (m_eye - target).normalized();
 		m_xAxis = cross(m_yAxis, m_zAxis).normalized();
 		m_yAxis = cross(m_zAxis, m_xAxis).normalized();
@@ -52,6 +57,10 @@ namespace TDZ {
 		m_view(3, 2) = -m_zAxis.dot(m_eye);
 		
 		m_orientation = m_view;
+	}
+	
+	const Matrix<4, 4, float>& Camera::projection() const {
+		return m_projection;
 	}
 	
 	const Matrix<4, 4, float>& Camera::view() const {
