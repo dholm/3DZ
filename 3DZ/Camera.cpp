@@ -22,6 +22,10 @@ namespace TDZ {
 	{
 	}
 	
+	Vector<3, float> Camera::getForward() const {
+		return cross(Vector3<float>(0.0, 1.0, 0.0), m_xAxis).normalized();
+	}
+	
 	Quaternion<float> Camera::getOrientation() const {
 		return m_orientation;
 	}
