@@ -25,6 +25,8 @@ namespace TDZ {
 		Camera();
 		virtual ~Camera() { }
 		
+		Quaternion<float> getOrientation() const;
+		
 		virtual void setProjection(const Frustum<float>& projection);
 		virtual void setPosition(const Vector<3, float>& pos);
 		virtual void setOrientation(const Quaternion<float>& o);

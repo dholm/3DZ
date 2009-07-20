@@ -22,6 +22,10 @@ namespace TDZ {
 	{
 	}
 	
+	Quaternion<float> Camera::getOrientation() const {
+		return m_orientation;
+	}
+
 	void Camera::setProjection(const Frustum<float>& projection) {
 		m_projection = projection;
 	}
