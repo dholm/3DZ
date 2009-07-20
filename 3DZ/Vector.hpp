@@ -81,6 +81,14 @@ namespace TDZ {
 			return result;
 		}
 		
+		Vector<N, ComponentT> operator*(const ComponentT& scalar) const {
+			Vector<N, ComponentT> result(*this);
+			for (std::size_t i = 0; i < N; ++i) {
+				result[i] *= scalar;
+			}
+			return result;
+		}
+		
 		ComponentT dot(const Vector<N, ComponentT>& vector) const {
 			ComponentT scalar = 0;
 			for (std::size_t i = 0; i < N; ++i) {
