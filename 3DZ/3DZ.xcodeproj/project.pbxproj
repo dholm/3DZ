@@ -42,6 +42,7 @@
 		9EB457C91012A141002A7FCE /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EB457C81012A141002A7FCE /* Camera.cpp */; };
 		9EC3171D1013A98D002C0277 /* Degree.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9EC3171C1013A98D002C0277 /* Degree.hpp */; };
 		9EC3171F1013A9BF002C0277 /* Radian.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9EC3171E1013A9BF002C0277 /* Radian.hpp */; };
+		9EC317301013B602002C0277 /* Frustum.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9EC3172F1013B602002C0277 /* Frustum.hpp */; };
 		9ED392BF0FE5884B008A9D41 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED392B90FE5884B008A9D41 /* Mesh.cpp */; };
 		9ED392C00FE5884B008A9D41 /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED392BA0FE5884B008A9D41 /* Mesh.hpp */; };
 		9ED393320FE58C88008A9D41 /* FaceIterator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9ED393300FE58C88008A9D41 /* FaceIterator.hpp */; };
@@ -94,6 +95,7 @@
 		9EB457C81012A141002A7FCE /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		9EC3171C1013A98D002C0277 /* Degree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Degree.hpp; sourceTree = "<group>"; };
 		9EC3171E1013A9BF002C0277 /* Radian.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Radian.hpp; sourceTree = "<group>"; };
+		9EC3172F1013B602002C0277 /* Frustum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Frustum.hpp; sourceTree = "<group>"; };
 		9ED392B90FE5884B008A9D41 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		9ED392BA0FE5884B008A9D41 /* Mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		9ED393300FE58C88008A9D41 /* FaceIterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FaceIterator.hpp; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				9E28B9391011474200D913F5 /* OpenGlCamera.cpp */,
 				9E28B9331011452000D913F5 /* Camera.hpp */,
 				9EB457C81012A141002A7FCE /* Camera.cpp */,
+				9EC3172F1013B602002C0277 /* Frustum.hpp */,
 			);
 			name = Rendering;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				9E28B93A1011474200D913F5 /* OpenGlCamera.hpp in Headers */,
 				9EC3171D1013A98D002C0277 /* Degree.hpp in Headers */,
 				9EC3171F1013A9BF002C0277 /* Radian.hpp in Headers */,
+				9EC317301013B602002C0277 /* Frustum.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
